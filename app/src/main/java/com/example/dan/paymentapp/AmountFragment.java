@@ -72,17 +72,21 @@ public class AmountFragment extends Fragment
     {
         mBinding = DataBindingUtil.inflate(inflater, R.layout.fragment_amount, container, false);
 
-        // Inflate the layout for this fragment
-        return inflater.inflate(R.layout.fragment_amount, container, false);
+        setClickListeners();
+
+        return mBinding.getRoot();
     }
 
-    // TODO: Rename method, update argument and hook method into UI event
-    public void onButtonPressed(Uri uri)
+    private void setClickListeners()
     {
-        if (mListener != null)
+        mBinding.buttons.nextBtn.setOnClickListener(new View.OnClickListener()
         {
-            //mListener.goToNextFragment(uri);
-        }
+            @Override
+            public void onClick(View v)
+            {
+                mListener.nextFragment();
+            }
+        });
     }
 
     @Override
@@ -96,7 +100,7 @@ public class AmountFragment extends Fragment
         else
         {
             throw new RuntimeException(context.toString()
-                    + " must implement OnAmountFragmentInteractionListener");
+                    + " must implement FragmentClicksListener");
         }
     }
 

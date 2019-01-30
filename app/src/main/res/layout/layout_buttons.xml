@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout>
+
+    <data>
+        <import type="android.view.View"/>
+
+        <variable
+            name="id"
+            type="int" />
+    </data>
+
+    <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        android:padding="6dp">
+
+        <!-- If fragment id is equal to amount fragment then don't show previous button -->
+        <ImageView
+            android:id="@+id/back_btn"
+            android:visibility="@{id == 0 ? View.INVISIBLE : View.VISIBLE}"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:src="@drawable/ic_arrow_back_black_24dp" />
+
+        <ImageView
+            android:id="@+id/next_btn"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:src="@drawable/ic_arrow_forward_black_24dp" />
+
+    </LinearLayout>
+
+</layout>
