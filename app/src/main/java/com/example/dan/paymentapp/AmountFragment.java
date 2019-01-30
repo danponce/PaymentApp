@@ -23,7 +23,7 @@ public class AmountFragment extends Fragment
     private String mParam1;
     private String mParam2;
 
-    private OnFragmentInteractionListener mListener;
+    private OnAmountFragmentInteractionListener mListener;
 
     public AmountFragment()
     {
@@ -73,7 +73,7 @@ public class AmountFragment extends Fragment
     {
         if (mListener != null)
         {
-            mListener.onFragmentInteraction(uri);
+            mListener.goToNextFragment(uri);
         }
     }
 
@@ -81,14 +81,14 @@ public class AmountFragment extends Fragment
     public void onAttach(Context context)
     {
         super.onAttach(context);
-        /*if (context instanceof OnFragmentInteractionListener)
+        /*if (context instanceof OnAmountFragmentInteractionListener)
         {
-            mListener = (OnFragmentInteractionListener) context;
+            mListener = (OnAmountFragmentInteractionListener) context;
         }
         else
         {
             throw new RuntimeException(context.toString()
-                    + " must implement OnFragmentInteractionListener");
+                    + " must implement OnAmountFragmentInteractionListener");
         }*/
     }
 
@@ -102,9 +102,8 @@ public class AmountFragment extends Fragment
     /**
      * Interacts with activity when user clicks on next button
      */
-    public interface OnFragmentInteractionListener
+    public interface OnAmountFragmentInteractionListener
     {
-        // TODO: Update argument type and name
-        void onFragmentInteraction(Uri uri);
+        void goToNextFragment(int fragmentId);
     }
 }
