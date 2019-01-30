@@ -5,6 +5,9 @@ import android.support.v4.app.FragmentTransaction;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 
+import com.example.dan.paymentapp.fragments.AmountFragment;
+import com.example.dan.paymentapp.fragments.MethodFragment;
+
 public class MainActivity extends AppCompatActivity implements FragmentClicksListener
 {
     public static final int FRAGMENT_AMOUNT = 0;
@@ -28,15 +31,28 @@ public class MainActivity extends AppCompatActivity implements FragmentClicksLis
     }
 
     @Override
-    public void previousFragment()
+    public void previousFragment(int fragmentId)
     {
 
     }
 
     @Override
-    public void nextFragment()
+    public void nextFragment(int fragmentId)
     {
+        FragmentTransaction fragmentTransaction = getSupportFragmentManager().beginTransaction();
 
+        fragmentTransaction.replace(R.id.container, getNextFragment(fragmentId));
+        fragmentTransaction.commitAllowingStateLoss();
+    }
+
+    private Fragment getNextFragment(int fragmentId)
+    {
+        switch (fragmentId)
+        {
+            case FRAGMENT_AMOUNT : return MethodFragment.newInstance("", "");
+
+            default: return null;
+        }
     }
 
     private Fragment getInitialFragment()

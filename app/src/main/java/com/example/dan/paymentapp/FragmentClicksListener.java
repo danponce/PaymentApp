@@ -2,6 +2,6 @@ package com.example.dan.paymentapp;
 
 public interface FragmentClicksListener
 {
-    void previousFragment();
-    void nextFragment();
+    void previousFragment(int fragmentId);
+    void nextFragment(int fragmentId);
 }
