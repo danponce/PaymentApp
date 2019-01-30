@@ -11,6 +11,7 @@ import com.example.dan.paymentapp.fragments.MethodFragment;
 public class MainActivity extends AppCompatActivity implements FragmentClicksListener
 {
     public static final int FRAGMENT_AMOUNT = 0;
+    public static final int FRAGMENT_METHOD = 1;
 
     @Override
     protected void onCreate(Bundle savedInstanceState)
