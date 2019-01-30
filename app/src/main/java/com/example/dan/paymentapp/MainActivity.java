@@ -4,9 +4,8 @@ import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentTransaction;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
-import android.view.View;
 
-public class MainActivity extends AppCompatActivity
+public class MainActivity extends AppCompatActivity implements FragmentClicksListener
 {
     public static final int FRAGMENT_AMOUNT = 0;
 
@@ -28,16 +27,20 @@ public class MainActivity extends AppCompatActivity
         fragmentTransaction.commitAllowingStateLoss();
     }
 
+    @Override
+    public void previousFragment()
+    {
+
+    }
+
+    @Override
+    public void nextFragment()
+    {
+
+    }
+
     private Fragment getInitialFragment()
     {
         return AmountFragment.newInstance("", "");
-    }
-
-    public class ClickHandler
-    {
-        public void nextFragmentClick(View v)
-        {
-
-        }
     }
 }

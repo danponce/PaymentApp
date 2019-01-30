@@ -1,12 +1,16 @@
 package com.example.dan.paymentapp;
 
 import android.content.Context;
+import android.databinding.DataBindingUtil;
 import android.net.Uri;
 import android.os.Bundle;
+import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+
+import com.example.dan.paymentapp.databinding.FragmentAmountBinding;
 
 
 /**
@@ -23,7 +27,9 @@ public class AmountFragment extends Fragment
     private String mParam1;
     private String mParam2;
 
-    private OnAmountFragmentInteractionListener mListener;
+    private FragmentClicksListener mListener;
+
+    private FragmentAmountBinding mBinding;
 
     public AmountFragment()
     {
@@ -64,6 +70,8 @@ public class AmountFragment extends Fragment
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState)
     {
+        mBinding = DataBindingUtil.inflate(inflater, R.layout.fragment_amount, container, false);
+
         // Inflate the layout for this fragment
         return inflater.inflate(R.layout.fragment_amount, container, false);
     }
@@ -73,7 +81,7 @@ public class AmountFragment extends Fragment
     {
         if (mListener != null)
         {
-            mListener.goToNextFragment(uri);
+            //mListener.goToNextFragment(uri);
         }
     }
 
@@ -81,15 +89,15 @@ public class AmountFragment extends Fragment
     public void onAttach(Context context)
     {
         super.onAttach(context);
-        /*if (context instanceof OnAmountFragmentInteractionListener)
+        if (context instanceof FragmentClicksListener)
         {
-            mListener = (OnAmountFragmentInteractionListener) context;
+            mListener = (FragmentClicksListener) context;
         }
         else
         {
             throw new RuntimeException(context.toString()
                     + " must implement OnAmountFragmentInteractionListener");
-        }*/
+        }
     }
 
     @Override
@@ -97,13 +105,5 @@ public class AmountFragment extends Fragment
     {
         super.onDetach();
         mListener = null;
-    }
-
-    /**
-     * Interacts with activity when user clicks on next button
-     */
-    public interface OnAmountFragmentInteractionListener
-    {
-        void goToNextFragment(int fragmentId);
     }
 }
