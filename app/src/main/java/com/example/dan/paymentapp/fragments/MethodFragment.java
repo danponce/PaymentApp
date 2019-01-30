@@ -12,6 +12,7 @@ import android.view.ViewGroup;
 import com.example.dan.paymentapp.FragmentClicksListener;
 import com.example.dan.paymentapp.MainActivity;
 import com.example.dan.paymentapp.R;
+import com.example.dan.paymentapp.databinding.FragmentMethodBinding;
 
 /**
  * To register the payment method desired for the user
