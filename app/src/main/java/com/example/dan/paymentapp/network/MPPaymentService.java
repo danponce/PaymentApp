@@ -1,6 +1,7 @@
 package com.example.dan.paymentapp.network;
 
 import com.example.dan.paymentapp.models.PaymentBank;
+import com.example.dan.paymentapp.models.PaymentIssuer;
 import com.example.dan.paymentapp.models.PaymentMethod;
 
 import java.util.List;
@@ -16,4 +17,10 @@ public interface MPPaymentService
 
     @GET("payment_methods/card_issuers")
     Call<List<PaymentBank>> getPaymentBanks(@Query("public_key") String publicKey, @Query("payment_method_id") String paymentMethodId);
+
+    @GET("payment_methods/installments")
+    Call<List<PaymentIssuer>> getPaymentIssuerQuotaInfo(@Query("public_key") String publicKey,
+                                                        @Query("payment_method_id") String paymentMethodId,
+                                                        @Query("amount") int amount,
+                                                        @Query("issuer.id") int issuerId);
 }
