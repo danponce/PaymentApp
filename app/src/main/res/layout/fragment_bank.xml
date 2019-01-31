@@ -25,12 +25,12 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:textSize="@dimen/payment_title_text_size"
-            android:text="@string/payment_method_title"
+            android:text="@string/payment_bank_title"
             app:layout_constraintTop_toTopOf="parent"
             android:layout_marginBottom="18dp"/>
 
         <android.support.v7.widget.RecyclerView
-            android:id="@+id/method_rv"
+            android:id="@+id/bank_rv"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:gravity="center_horizontal"

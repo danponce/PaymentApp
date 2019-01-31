@@ -5,7 +5,8 @@
 
     <string name="hint_amount">Monto</string>
 
-    <string name="payment_method_title">Ingresa tu método de pago</string>
+    <string name="payment_method_title">Selecciona el método de pago</string>
+    <string name="payment_bank_title">Selecciona el Banco</string>
 
     <string name="mp_public_key">444a9ef5-8a6b-429f-abdf-587639155d88</string>
 </resources>

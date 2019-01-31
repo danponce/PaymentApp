@@ -1,4 +1,4 @@
-package com.example.dan.paymentapp;
+package com.example.dan.paymentapp.models;
 
 import android.databinding.ObservableBoolean;
 
