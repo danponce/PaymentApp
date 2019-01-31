@@ -17,7 +17,7 @@ import com.example.dan.paymentapp.databinding.FragmentAmountBinding;
 /**
  * For setting the payment amount desired by the user
  */
-public class AmountFragment extends Fragment
+public class AmountFragment extends BaseFragment
 {
     // TODO: Rename parameter arguments, choose names that match
     // the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
@@ -37,15 +37,6 @@ public class AmountFragment extends Fragment
         // Required empty public constructor
     }
 
-    /**
-     * Use this factory method to create a new instance of
-     * this fragment using the provided parameters.
-     *
-     * @param param1 Parameter 1.
-     * @param param2 Parameter 2.
-     * @return A new instance of fragment AmountFragment.
-     */
-    // TODO: Rename and change types and number of parameters
     public static AmountFragment newInstance(String param1, String param2)
     {
         AmountFragment fragment = new AmountFragment();
@@ -80,35 +71,12 @@ public class AmountFragment extends Fragment
 
     private void setClickListeners()
     {
-        mBinding.buttons.nextBtn.setOnClickListener(new View.OnClickListener()
-        {
-            @Override
-            public void onClick(View v)
-            {
-                mListener.nextFragment(MainActivity.FRAGMENT_AMOUNT);
-            }
-        });
+
     }
 
     @Override
-    public void onAttach(Context context)
+    public int getFragmentId()
     {
-        super.onAttach(context);
-        if (context instanceof FragmentClicksListener)
-        {
-            mListener = (FragmentClicksListener) context;
-        }
-        else
-        {
-            throw new RuntimeException(context.toString()
-                    + " must implement FragmentClicksListener");
-        }
-    }
-
-    @Override
-    public void onDetach()
-    {
-        super.onDetach();
-        mListener = null;
+        return MainActivity.FRAGMENT_AMOUNT;
     }
 }

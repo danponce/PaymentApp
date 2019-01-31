@@ -29,7 +29,7 @@ import retrofit2.Response;
 /**
  * To register the payment method desired for the user
  */
-public class MethodFragment extends Fragment
+public class MethodFragment extends BaseFragment
 {
     // TODO: Rename parameter arguments, choose names that match
     // the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
@@ -122,24 +122,8 @@ public class MethodFragment extends Fragment
     }
 
     @Override
-    public void onAttach(Context context)
+    public int getFragmentId()
     {
-        super.onAttach(context);
-        if (context instanceof FragmentClicksListener)
-        {
-            mListener = (FragmentClicksListener) context;
-        }
-        else
-        {
-            throw new RuntimeException(context.toString()
-                    + " must implement FragmentClicksListener");
-        }
-    }
-
-    @Override
-    public void onDetach()
-    {
-        super.onDetach();
-        mListener = null;
+        return MainActivity.FRAGMENT_METHOD;
     }
 }
