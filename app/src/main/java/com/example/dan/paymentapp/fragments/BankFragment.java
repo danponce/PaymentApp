@@ -3,12 +3,25 @@ package com.example.dan.paymentapp.fragments;
 
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
+import android.support.v7.widget.LinearLayoutManager;
+import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
 import com.example.dan.paymentapp.MainActivity;
 import com.example.dan.paymentapp.R;
+import com.example.dan.paymentapp.adapters.PaymentBankRecyclerAdapter;
+import com.example.dan.paymentapp.databinding.FragmentBankBinding;
+import com.example.dan.paymentapp.models.PaymentBank;
+import com.example.dan.paymentapp.network.MPPaymentService;
+import com.example.dan.paymentapp.network.RetrofitClient;
+
+import java.util.List;
+
+import retrofit2.Call;
+import retrofit2.Callback;
+import retrofit2.Response;
 
 /**
  * A simple {@link Fragment} subclass.
@@ -26,6 +39,7 @@ public class BankFragment extends BaseFragment
     private String mParam1;
     private String mParam2;
 
+    private FragmentBankBinding mBinding;
 
     public BankFragment()
     {
@@ -66,8 +80,40 @@ public class BankFragment extends BaseFragment
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState)
     {
-        // Inflate the layout for this fragment
-        return inflater.inflate(R.layout.fragment_bank, container, false);
+        mBinding = FragmentBankBinding.inflate(inflater, container, false);
+
+        getPaymentBanks();
+
+        return mBinding.getRoot();
+    }
+
+    private void getPaymentBanks()
+    {
+        MPPaymentService service = RetrofitClient.getRetrofitInstance().create(MPPaymentService.class);
+
+        Call<List<PaymentBank>> call = service.getPaymentBanks(getString(R.string.mp_public_key), "visa");
+        call.enqueue(new Callback<List<PaymentBank>>()
+        {
+            @Override
+            public void onResponse(Call<List<PaymentBank>> call, Response<List<PaymentBank>> response)
+            {
+                setPaymentBankRecyclerView(response.body());
+            }
+
+            @Override
+            public void onFailure(Call<List<PaymentBank>> call, Throwable t)
+            {
+
+            }
+        });
+    }
+
+    private void setPaymentBankRecyclerView(List<PaymentBank> paymentBankList)
+    {
+        RecyclerView methodsRecyclerView = mBinding.bankRv;
+
+        methodsRecyclerView.setLayoutManager(new LinearLayoutManager(getContext()));
+        methodsRecyclerView.setAdapter(new PaymentBankRecyclerAdapter(paymentBankList));
     }
 
     @Override

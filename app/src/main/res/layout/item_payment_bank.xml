@@ -1,0 +1,66 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:tools="http://schemas.android.com/tools">
+
+    <data>
+
+        <import type="android.view.View" />
+
+        <variable
+            name="bank"
+            type="com.example.dan.paymentapp.models.PaymentBank" />
+    </data>
+
+    <android.support.v7.widget.CardView
+        android:id="@+id/card"
+        xmlns:android="http://schemas.android.com/apk/res/android"
+        xmlns:bind="http://schemas.android.com/apk/res-auto"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:foreground="?android:attr/selectableItemBackground"
+        android:clickable="true"
+        android:layout_marginLeft="4dp"
+        android:layout_marginRight="4dp"
+        android:layout_marginTop="2dp"
+        android:layout_marginBottom="2dp">
+
+        <RelativeLayout
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:gravity="center_vertical"
+            android:padding="4dp"
+            android:background="@{bank.isSelected ? @color/md_blue_500 : @color/white}">
+
+            <ImageView
+                android:id="@+id/thumbnail"
+                android:layout_margin="2dp"
+                android:layout_width="@dimen/payment_method_thumbnail_size"
+                android:layout_height="@dimen/payment_method_thumbnail_size"
+                tools:src="@drawable/ic_launcher_background"
+                android:layout_centerVertical="true"
+                bind:imageUrl="@{method.thumbnail}" />
+
+            <TextView
+                android:layout_toRightOf="@id/thumbnail"
+                android:layout_toLeftOf="@id/check"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_centerVertical="true"
+                android:layout_marginLeft="8dp"
+                android:textColor="@{bank.isSelected ? @color/white : @color/md_grey_800}"
+                android:text="@{bank.name}"
+                tools:text="Visa" />
+
+            <ImageView
+                android:id="@+id/check"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignParentRight="true"
+                android:layout_centerVertical="true"
+                android:src="@drawable/ic_check_white_24dp"
+                android:layout_margin="2dp"
+                android:visibility="@{bank.isSelected ? View.VISIBLE : View.INVISIBLE}"/>
+
+        </RelativeLayout>
+
+    </android.support.v7.widget.CardView>
+</layout>
