@@ -5,14 +5,26 @@ import android.databinding.DataBindingUtil;
 import android.net.Uri;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
+import android.support.v7.widget.LinearLayoutManager;
+import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
 import com.example.dan.paymentapp.FragmentClicksListener;
 import com.example.dan.paymentapp.MainActivity;
+import com.example.dan.paymentapp.PaymentMethod;
 import com.example.dan.paymentapp.R;
+import com.example.dan.paymentapp.adapters.PaymentMethodRecyclerAdapter;
 import com.example.dan.paymentapp.databinding.FragmentMethodBinding;
+import com.example.dan.paymentapp.network.MPPaymentService;
+import com.example.dan.paymentapp.network.RetrofitClient;
+
+import java.util.List;
+
+import retrofit2.Call;
+import retrofit2.Callback;
+import retrofit2.Response;
 
 /**
  * To register the payment method desired for the user
@@ -29,6 +41,8 @@ public class MethodFragment extends Fragment
     private String mParam2;
 
     private FragmentClicksListener mListener;
+
+    private FragmentMethodBinding mBinding;
 
     public MethodFragment()
     {
@@ -69,11 +83,42 @@ public class MethodFragment extends Fragment
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState)
     {
-        FragmentMethodBinding binding = DataBindingUtil.inflate(inflater, R.layout.fragment_method, container, false);
+        mBinding = DataBindingUtil.inflate(inflater, R.layout.fragment_method, container, false);
 
-        binding.setId(MainActivity.FRAGMENT_METHOD);
+        mBinding.setId(MainActivity.FRAGMENT_METHOD);
 
-        return binding.getRoot();
+        getPaymentMethods();
+
+        return mBinding.getRoot();
+    }
+
+    private void getPaymentMethods()
+    {
+        MPPaymentService service = RetrofitClient.getRetrofitInstance().create(MPPaymentService.class);
+
+        Call<List<PaymentMethod>> call = service.getPaymentMethods(getString(R.string.mp_public_key));
+        call.enqueue(new Callback<List<PaymentMethod>>()
+        {
+            @Override
+            public void onResponse(Call<List<PaymentMethod>> call, Response<List<PaymentMethod>> response)
+            {
+                setPaymentMethodRecyclerView(response.body());
+            }
+
+            @Override
+            public void onFailure(Call<List<PaymentMethod>> call, Throwable t)
+            {
+
+            }
+        });
+    }
+
+    private void setPaymentMethodRecyclerView(List<PaymentMethod> paymentMethodList)
+    {
+        RecyclerView methodsRecyclerView = mBinding.methodRv;
+
+        methodsRecyclerView.setLayoutManager(new LinearLayoutManager(getContext(), LinearLayoutManager.HORIZONTAL, false));
+        methodsRecyclerView.setAdapter(new PaymentMethodRecyclerAdapter(paymentMethodList));
     }
 
     @Override

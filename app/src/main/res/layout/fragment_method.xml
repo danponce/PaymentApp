@@ -23,12 +23,11 @@
             android:text="@string/payment_method_title"
             app:layout_constraintTop_toTopOf="parent"/>
 
-        <android.support.v7.widget.AppCompatEditText
+        <android.support.v7.widget.RecyclerView
+            android:id="@+id/method_rv"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:gravity="center_horizontal"
-            android:hint="Método"
-            android:textSize="@dimen/amount_text_size"
             app:layout_constraintTop_toBottomOf="@id/title_tv"
             app:layout_constraintLeft_toLeftOf="parent"
             app:layout_constraintRight_toRightOf="parent" />

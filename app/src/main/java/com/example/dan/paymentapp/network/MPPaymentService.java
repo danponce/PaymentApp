@@ -8,8 +8,8 @@ import retrofit2.Call;
 import retrofit2.http.GET;
 import retrofit2.http.Query;
 
-interface MPPaymentService
+public interface MPPaymentService
 {
-    @GET()
+    @GET("payment_methods")
     Call<List<PaymentMethod>> getPaymentMethods(@Query("public_key") String publicKey);
 }
