@@ -3,6 +3,7 @@ package com.example.dan.paymentapp.adapters;
 import android.support.annotation.NonNull;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
+import android.view.View;
 import android.view.ViewGroup;
 
 import com.example.dan.paymentapp.PaymentMethod;
@@ -31,7 +32,20 @@ public class PaymentMethodRecyclerAdapter extends RecyclerView.Adapter<PaymentMe
     @Override
     public void onBindViewHolder(@NonNull PaymentMethodViewHolder paymentMethodViewHolder, int i)
     {
-        paymentMethodViewHolder.bind(mPaymentMethodList.get(i));
+        final PaymentMethod method = mPaymentMethodList.get(i);
+
+        paymentMethodViewHolder.getBinding().card.setOnClickListener(new View.OnClickListener()
+        {
+            @Override
+            public void onClick(View v)
+            {
+                for (PaymentMethod paymentMethod : mPaymentMethodList)
+                    paymentMethod.isSelected.set(false);
+
+                method.isSelected.set(true);
+            }
+        });
+        paymentMethodViewHolder.bind(method);
     }
 
     @Override

@@ -14,6 +14,11 @@ public class PaymentMethodViewHolder extends RecyclerView.ViewHolder
         this.binding = binding;
     }
 
+    public ItemPaymentMethodBinding getBinding()
+    {
+        return binding;
+    }
+
     public void bind(PaymentMethod method) {
         binding.setMethod(method);
         binding.executePendingBindings();

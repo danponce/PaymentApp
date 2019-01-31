@@ -1,10 +1,15 @@
 package com.example.dan.paymentapp;
 
+import android.databinding.ObservableBoolean;
+
+import java.util.Observable;
+
 public class PaymentMethod
 {
     private String id;
     private String name;
     private String thumbnail;
+    public final ObservableBoolean isSelected = new ObservableBoolean();
 
 
     public String getId()
