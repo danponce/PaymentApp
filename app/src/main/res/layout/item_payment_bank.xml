@@ -37,7 +37,7 @@
                 android:layout_height="@dimen/payment_method_thumbnail_size"
                 tools:src="@drawable/ic_launcher_background"
                 android:layout_centerVertical="true"
-                bind:imageUrl="@{method.thumbnail}" />
+                bind:imageUrl="@{bank.thumbnail}" />
 
             <TextView
                 android:layout_toRightOf="@id/thumbnail"

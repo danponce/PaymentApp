@@ -6,9 +6,9 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
-import com.example.dan.paymentapp.databinding.ItemPaymentMethodBinding;
 import com.example.dan.paymentapp.models.PaymentBank;
-import com.example.dan.paymentapp.models.PaymentMethod;
+import com.example.dan.paymentapp.databinding.ItemPaymentBankBinding;
+
 
 import java.util.List;
 
