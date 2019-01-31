@@ -117,7 +117,7 @@ public class MethodFragment extends Fragment
     {
         RecyclerView methodsRecyclerView = mBinding.methodRv;
 
-        methodsRecyclerView.setLayoutManager(new LinearLayoutManager(getContext(), LinearLayoutManager.HORIZONTAL, false));
+        methodsRecyclerView.setLayoutManager(new LinearLayoutManager(getContext()));
         methodsRecyclerView.setAdapter(new PaymentMethodRecyclerAdapter(paymentMethodList));
     }
 
