@@ -23,7 +23,9 @@ public class MainActivity extends AppCompatActivity implements FragmentClicksLis
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
-        setInitialFragment();
+        // If the activity is being created for the first time
+        if(savedInstanceState == null)
+            setInitialFragment();
     }
 
     private void setInitialFragment()

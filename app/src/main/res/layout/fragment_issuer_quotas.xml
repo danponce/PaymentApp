@@ -35,11 +35,11 @@
             android:layout_marginBottom="18dp"/>
 
         <android.support.v7.widget.AppCompatSpinner
+            style="@style/Base.Widget.AppCompat.Spinner.Underlined"
             android:id="@+id/quotas_spinner"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:gravity="center_horizontal"
-            android:background="@color/md_grey_200"
             app:layout_constrainedHeight="true"
             app:layout_constraintTop_toBottomOf="@id/title_tv"
             app:layout_constraintLeft_toLeftOf="parent"
@@ -51,7 +51,7 @@
             app:layout_constraintTop_toBottomOf="@id/quotas_spinner"
             app:layout_constraintLeft_toLeftOf="parent"
             app:layout_constraintRight_toRightOf="parent"
-            android:textSize="24sp"
+            android:textSize="20sp"
             tools:text="3 cuotas de $3.900"
             android:text="@{model.message}"/>
 

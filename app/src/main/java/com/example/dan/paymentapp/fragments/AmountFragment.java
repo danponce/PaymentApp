@@ -63,6 +63,7 @@ public class AmountFragment extends BaseFragment
                              Bundle savedInstanceState)
     {
         mBinding = DataBindingUtil.inflate(inflater, R.layout.fragment_amount, container, false);
+        mBinding.setId(getFragmentId());
 
         setClickListeners();
 

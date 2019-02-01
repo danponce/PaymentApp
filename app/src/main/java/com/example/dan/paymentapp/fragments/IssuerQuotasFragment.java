@@ -1,6 +1,8 @@
 package com.example.dan.paymentapp.fragments;
 
 
+import android.arch.lifecycle.ViewModelProvider;
+import android.arch.lifecycle.ViewModelProviders;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
@@ -14,6 +16,7 @@ import com.example.dan.paymentapp.R;
 import com.example.dan.paymentapp.adapters.PaymentQuotasArrayAdapter;
 import com.example.dan.paymentapp.databinding.FragmentIssuerQuotasBinding;
 import com.example.dan.paymentapp.models.IssuerBindModel;
+import com.example.dan.paymentapp.models.IssuerQuotasViewModel;
 import com.example.dan.paymentapp.models.PaymentIssuer;
 import com.example.dan.paymentapp.models.PaymentIssuerQuota;
 import com.example.dan.paymentapp.network.MPPaymentService;
@@ -42,6 +45,7 @@ public class IssuerQuotasFragment extends BaseFragment
     private FragmentIssuerQuotasBinding mBinding;
     private IssuerBindModel mBindModel;
 
+    private IssuerQuotasViewModel mIssuerViewModel;
 
     public IssuerQuotasFragment()
     {
@@ -77,7 +81,10 @@ public class IssuerQuotasFragment extends BaseFragment
 
         mBindModel = new IssuerBindModel();
 
+        mIssuerViewModel = ViewModelProviders.of(this).get(IssuerQuotasViewModel.class);
+
         mBinding.setModel(mBindModel);
+        mBinding.setId(getFragmentId());
 
         return mBinding.getRoot();
     }
@@ -87,7 +94,10 @@ public class IssuerQuotasFragment extends BaseFragment
     {
         super.onActivityCreated(savedInstanceState);
 
-        getIssuerQuotas();
+        if(mIssuerViewModel.getPaymentIssuer() != null)
+            setQuotasSpinner(mIssuerViewModel.getPaymentIssuer());
+        else
+            getIssuerQuotas();
     }
 
     private void getIssuerQuotas()
@@ -104,7 +114,11 @@ public class IssuerQuotasFragment extends BaseFragment
             @Override
             public void onResponse(Call<List<PaymentIssuer>> call, Response<List<PaymentIssuer>> response)
             {
-                setQuotasSpinner(response.body().get(0));
+                PaymentIssuer issuer = response.body().get(0);
+
+                mIssuerViewModel.setPaymentIssuer(issuer);
+
+                setQuotasSpinner(issuer);
             }
 
             @Override
