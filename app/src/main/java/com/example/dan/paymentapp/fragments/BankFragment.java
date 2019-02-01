@@ -14,9 +14,11 @@ import android.view.ViewGroup;
 
 import com.example.dan.paymentapp.MainActivity;
 import com.example.dan.paymentapp.R;
+import com.example.dan.paymentapp.adapters.BankRecyclerClickListener;
 import com.example.dan.paymentapp.adapters.PaymentBankRecyclerAdapter;
 import com.example.dan.paymentapp.databinding.FragmentBankBinding;
 import com.example.dan.paymentapp.models.BankViewModel;
+import com.example.dan.paymentapp.models.MPDataViewModel;
 import com.example.dan.paymentapp.models.PaymentBank;
 import com.example.dan.paymentapp.network.MPPaymentService;
 import com.example.dan.paymentapp.network.RetrofitClient;
@@ -32,7 +34,7 @@ import retrofit2.Response;
  * Use the {@link BankFragment#newInstance} factory method to
  * create an instance of this fragment.
  */
-public class BankFragment extends BaseFragment
+public class BankFragment extends BaseFragment implements BankRecyclerClickListener
 {
     // TODO: Rename parameter arguments, choose names that match
     // the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
@@ -46,21 +48,13 @@ public class BankFragment extends BaseFragment
     private FragmentBankBinding mBinding;
 
     private BankViewModel mBankViewModel;
+    private MPDataViewModel mMPDataViewModel;
 
     public BankFragment()
     {
         // Required empty public constructor
     }
 
-    /**
-     * Use this factory method to create a new instance of
-     * this fragment using the provided parameters.
-     *
-     * @param param1 Parameter 1.
-     * @param param2 Parameter 2.
-     * @return A new instance of fragment BankFragment.
-     */
-    // TODO: Rename and change types and number of parameters
     public static BankFragment newInstance(String param1, String param2)
     {
         BankFragment fragment = new BankFragment();
@@ -80,6 +74,8 @@ public class BankFragment extends BaseFragment
             mParam1 = getArguments().getString(ARG_PARAM1);
             mParam2 = getArguments().getString(ARG_PARAM2);
         }
+
+        mMPDataViewModel = ViewModelProviders.of(getActivity()).get(MPDataViewModel.class);
     }
 
     @Override
@@ -106,11 +102,18 @@ public class BankFragment extends BaseFragment
             setPaymentBankRecyclerView(mBankViewModel.getPaymentBankList());
     }
 
+    @Override
+    public void onActivityCreated(@Nullable Bundle savedInstanceState)
+    {
+        super.onActivityCreated(savedInstanceState);
+
+    }
+
     private void getPaymentBanks()
     {
         MPPaymentService service = RetrofitClient.getRetrofitInstance().create(MPPaymentService.class);
 
-        Call<List<PaymentBank>> call = service.getPaymentBanks(getString(R.string.mp_public_key), "visa");
+        Call<List<PaymentBank>> call = service.getPaymentBanks(getString(R.string.mp_public_key), mMPDataViewModel.paymentMethod.get());
         call.enqueue(new Callback<List<PaymentBank>>()
         {
             @Override
@@ -132,7 +135,14 @@ public class BankFragment extends BaseFragment
         RecyclerView methodsRecyclerView = mBinding.bankRv;
 
         methodsRecyclerView.setLayoutManager(new LinearLayoutManager(getContext()));
-        methodsRecyclerView.setAdapter(new PaymentBankRecyclerAdapter(paymentBankList));
+        methodsRecyclerView.setAdapter(new PaymentBankRecyclerAdapter(paymentBankList, this));
+    }
+
+    @Override
+    public void onBankClick(PaymentBank bank)
+    {
+        mMPDataViewModel.paymentBank.set(bank.getId());
+        mMPDataViewModel.setBank(bank);
     }
 
     @Override

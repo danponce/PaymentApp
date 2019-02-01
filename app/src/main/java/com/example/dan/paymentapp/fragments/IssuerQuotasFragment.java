@@ -17,6 +17,7 @@ import com.example.dan.paymentapp.adapters.PaymentQuotasArrayAdapter;
 import com.example.dan.paymentapp.databinding.FragmentIssuerQuotasBinding;
 import com.example.dan.paymentapp.models.IssuerBindModel;
 import com.example.dan.paymentapp.models.IssuerQuotasViewModel;
+import com.example.dan.paymentapp.models.MPDataViewModel;
 import com.example.dan.paymentapp.models.PaymentIssuer;
 import com.example.dan.paymentapp.models.PaymentIssuerQuota;
 import com.example.dan.paymentapp.network.MPPaymentService;
@@ -46,6 +47,7 @@ public class IssuerQuotasFragment extends BaseFragment
     private IssuerBindModel mBindModel;
 
     private IssuerQuotasViewModel mIssuerViewModel;
+    private MPDataViewModel mMPDataViewModel;
 
     public IssuerQuotasFragment()
     {
@@ -71,6 +73,8 @@ public class IssuerQuotasFragment extends BaseFragment
             mParam1 = getArguments().getString(ARG_PARAM1);
             mParam2 = getArguments().getString(ARG_PARAM2);
         }
+
+        mMPDataViewModel = ViewModelProviders.of(getActivity()).get(MPDataViewModel.class);
     }
 
     @Override
@@ -105,9 +109,9 @@ public class IssuerQuotasFragment extends BaseFragment
         MPPaymentService service = RetrofitClient.getRetrofitInstance().create(MPPaymentService.class);
 
         Call<List<PaymentIssuer>> call = service.getPaymentIssuerQuotasInfo(getString(R.string.mp_public_key),
-                "visa",
+                mMPDataViewModel.paymentMethod.get(),
                 20000,
-                288);
+                mMPDataViewModel.paymentBank.get());
 
         call.enqueue(new Callback<List<PaymentIssuer>>()
         {
@@ -142,6 +146,9 @@ public class IssuerQuotasFragment extends BaseFragment
 
                 // Set the new recommended message to show
                 mBindModel.message.set(quota.getRecommendedMessage());
+
+                mMPDataViewModel.paymentIssuerQuotas.set(quota.getInstallments());
+                mMPDataViewModel.setQuota(quota);
             }
 
             @Override

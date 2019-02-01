@@ -15,10 +15,12 @@ import java.util.List;
 public class PaymentBankRecyclerAdapter extends RecyclerView.Adapter<PaymentBankViewHolder>
 {
     private List<PaymentBank> mPaymentBankList;
+    private BankRecyclerClickListener mBankClickListener;
 
-    public PaymentBankRecyclerAdapter(List<PaymentBank> mPaymentBankList)
+    public PaymentBankRecyclerAdapter(List<PaymentBank> mPaymentBankList, BankRecyclerClickListener listener)
     {
         this.mPaymentBankList = mPaymentBankList;
+        this.mBankClickListener = listener;
     }
 
     @NonNull
@@ -33,7 +35,7 @@ public class PaymentBankRecyclerAdapter extends RecyclerView.Adapter<PaymentBank
     @Override
     public void onBindViewHolder(@NonNull PaymentBankViewHolder paymentMethodViewHolder, int i)
     {
-        final PaymentBank method = mPaymentBankList.get(i);
+        final PaymentBank bank = mPaymentBankList.get(i);
 
         paymentMethodViewHolder.getBinding().card.setOnClickListener(new View.OnClickListener()
         {
@@ -43,10 +45,12 @@ public class PaymentBankRecyclerAdapter extends RecyclerView.Adapter<PaymentBank
                 for (PaymentBank paymentBank : mPaymentBankList)
                     paymentBank.isSelected.set(false);
 
-                method.isSelected.set(true);
+                bank.isSelected.set(true);
+
+                mBankClickListener.onBankClick(bank);
             }
         });
-        paymentMethodViewHolder.bind(method);
+        paymentMethodViewHolder.bind(bank);
     }
 
     @Override

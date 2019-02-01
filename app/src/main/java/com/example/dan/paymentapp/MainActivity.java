@@ -1,5 +1,6 @@
 package com.example.dan.paymentapp;
 
+import android.arch.lifecycle.ViewModelProviders;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentTransaction;
 import android.support.v7.app.AppCompatActivity;
@@ -9,6 +10,7 @@ import com.example.dan.paymentapp.fragments.AmountFragment;
 import com.example.dan.paymentapp.fragments.BankFragment;
 import com.example.dan.paymentapp.fragments.IssuerQuotasFragment;
 import com.example.dan.paymentapp.fragments.MethodFragment;
+import com.example.dan.paymentapp.models.MPDataViewModel;
 
 public class MainActivity extends AppCompatActivity implements FragmentClicksListener
 {
@@ -17,11 +19,15 @@ public class MainActivity extends AppCompatActivity implements FragmentClicksLis
     public static final int FRAGMENT_BANK = 2;
     public static final int FRAGMENT_ISSUER_QUOTAS = 3;
 
+    private MPDataViewModel mMPDataViewModel;
+
     @Override
     protected void onCreate(Bundle savedInstanceState)
     {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
+
+        mMPDataViewModel = ViewModelProviders.of(this).get(MPDataViewModel.class);
 
         // If the activity is being created for the first time
         if(savedInstanceState == null)

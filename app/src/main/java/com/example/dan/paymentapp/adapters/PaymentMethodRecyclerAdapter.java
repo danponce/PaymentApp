@@ -14,10 +14,12 @@ import java.util.List;
 public class PaymentMethodRecyclerAdapter extends RecyclerView.Adapter<PaymentMethodViewHolder>
 {
     private List<PaymentMethod> mPaymentMethodList;
+    private MethodRecyclerClickListener mMethodClickListener;
 
-    public PaymentMethodRecyclerAdapter(List<PaymentMethod> mPaymentMethodList)
+    public PaymentMethodRecyclerAdapter(List<PaymentMethod> mPaymentMethodList, MethodRecyclerClickListener listener)
     {
         this.mPaymentMethodList = mPaymentMethodList;
+        this.mMethodClickListener = listener;
     }
 
     @NonNull
@@ -43,6 +45,8 @@ public class PaymentMethodRecyclerAdapter extends RecyclerView.Adapter<PaymentMe
                     paymentMethod.isSelected.set(false);
 
                 method.isSelected.set(true);
+
+                mMethodClickListener.onMethodClick(method);
             }
         });
         paymentMethodViewHolder.bind(method);

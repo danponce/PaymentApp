@@ -13,6 +13,8 @@ import android.view.ViewGroup;
 
 import com.example.dan.paymentapp.FragmentClicksListener;
 import com.example.dan.paymentapp.MainActivity;
+import com.example.dan.paymentapp.adapters.MethodRecyclerClickListener;
+import com.example.dan.paymentapp.models.MPDataViewModel;
 import com.example.dan.paymentapp.models.MethodViewModel;
 import com.example.dan.paymentapp.models.PaymentMethod;
 import com.example.dan.paymentapp.R;
@@ -30,7 +32,7 @@ import retrofit2.Response;
 /**
  * To register the payment method desired for the user
  */
-public class MethodFragment extends BaseFragment
+public class MethodFragment extends BaseFragment implements MethodRecyclerClickListener
 {
     // TODO: Rename parameter arguments, choose names that match
     // the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
@@ -46,6 +48,7 @@ public class MethodFragment extends BaseFragment
     private FragmentMethodBinding mBinding;
 
     private MethodViewModel mMethodViewModel;
+    private MPDataViewModel mMPDataViewModel;
 
     public MethodFragment()
     {
@@ -80,6 +83,8 @@ public class MethodFragment extends BaseFragment
             mParam1 = getArguments().getString(ARG_PARAM1);
             mParam2 = getArguments().getString(ARG_PARAM2);
         }
+
+        mMPDataViewModel = ViewModelProviders.of(getActivity()).get(MPDataViewModel.class);
     }
 
     @Override
@@ -93,6 +98,13 @@ public class MethodFragment extends BaseFragment
         mMethodViewModel = ViewModelProviders.of(this).get(MethodViewModel.class);
 
         return mBinding.getRoot();
+    }
+
+    @Override
+    public void onActivityCreated(@Nullable Bundle savedInstanceState)
+    {
+        super.onActivityCreated(savedInstanceState);
+
     }
 
     @Override
@@ -127,12 +139,19 @@ public class MethodFragment extends BaseFragment
         });
     }
 
+    @Override
+    public void onMethodClick(PaymentMethod method)
+    {
+        mMPDataViewModel.paymentMethod.set(method.getId());
+        mMPDataViewModel.setMethod(method);
+    }
+
     private void setPaymentMethodRecyclerView(List<PaymentMethod> paymentMethodList)
     {
         RecyclerView methodsRecyclerView = mBinding.methodRv;
 
         methodsRecyclerView.setLayoutManager(new LinearLayoutManager(getContext()));
-        methodsRecyclerView.setAdapter(new PaymentMethodRecyclerAdapter(paymentMethodList));
+        methodsRecyclerView.setAdapter(new PaymentMethodRecyclerAdapter(paymentMethodList, this));
     }
 
     @Override
