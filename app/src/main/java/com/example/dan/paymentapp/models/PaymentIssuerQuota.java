@@ -8,4 +8,24 @@ public class PaymentIssuerQuota
 
     @SerializedName("recommended_message")
     private String recommendedMessage;
+
+    public int getInstallments()
+    {
+        return installments;
+    }
+
+    public void setInstallments(int installments)
+    {
+        this.installments = installments;
+    }
+
+    public String getRecommendedMessage()
+    {
+        return recommendedMessage;
+    }
+
+    public void setRecommendedMessage(String recommendedMessage)
+    {
+        this.recommendedMessage = recommendedMessage;
+    }
 }

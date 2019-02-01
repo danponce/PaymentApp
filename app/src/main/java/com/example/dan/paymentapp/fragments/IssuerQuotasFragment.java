@@ -7,12 +7,15 @@ import android.support.v4.app.Fragment;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.AdapterView;
 
 import com.example.dan.paymentapp.MainActivity;
 import com.example.dan.paymentapp.R;
 import com.example.dan.paymentapp.adapters.PaymentQuotasArrayAdapter;
 import com.example.dan.paymentapp.databinding.FragmentIssuerQuotasBinding;
+import com.example.dan.paymentapp.models.IssuerBindModel;
 import com.example.dan.paymentapp.models.PaymentIssuer;
+import com.example.dan.paymentapp.models.PaymentIssuerQuota;
 import com.example.dan.paymentapp.network.MPPaymentService;
 import com.example.dan.paymentapp.network.RetrofitClient;
 
@@ -37,6 +40,7 @@ public class IssuerQuotasFragment extends BaseFragment
     private String mParam2;
 
     private FragmentIssuerQuotasBinding mBinding;
+    private IssuerBindModel mBindModel;
 
 
     public IssuerQuotasFragment()
@@ -44,15 +48,6 @@ public class IssuerQuotasFragment extends BaseFragment
         // Required empty public constructor
     }
 
-    /**
-     * Use this factory method to create a new instance of
-     * this fragment using the provided parameters.
-     *
-     * @param param1 Parameter 1.
-     * @param param2 Parameter 2.
-     * @return A new instance of fragment IssuerQuotasFragment.
-     */
-    // TODO: Rename and change types and number of parameters
     public static IssuerQuotasFragment newInstance(String param1, String param2)
     {
         IssuerQuotasFragment fragment = new IssuerQuotasFragment();
@@ -79,6 +74,10 @@ public class IssuerQuotasFragment extends BaseFragment
                              Bundle savedInstanceState)
     {
         mBinding = FragmentIssuerQuotasBinding.inflate(inflater, container, false);
+
+        mBindModel = new IssuerBindModel();
+
+        mBinding.setModel(mBindModel);
 
         return mBinding.getRoot();
     }
@@ -120,6 +119,23 @@ public class IssuerQuotasFragment extends BaseFragment
     private void setQuotasSpinner(PaymentIssuer issuer)
     {
         mBinding.quotasSpinner.setAdapter(new PaymentQuotasArrayAdapter(getActivity(), R.layout.item_quota, issuer.getPayerCosts()));
+        mBinding.quotasSpinner.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener()
+        {
+            @Override
+            public void onItemSelected(AdapterView<?> parent, View view, int position, long id)
+            {
+                PaymentIssuerQuota quota = (PaymentIssuerQuota) parent.getItemAtPosition(position);
+
+                // Set the new recommended message to show
+                mBindModel.recommendedMesage.set(quota.getRecommendedMessage());
+            }
+
+            @Override
+            public void onNothingSelected(AdapterView<?> parent)
+            {
+
+            }
+        });
     }
 
     @Override
