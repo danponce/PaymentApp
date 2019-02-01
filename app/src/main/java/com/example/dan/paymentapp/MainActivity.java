@@ -14,6 +14,7 @@ public class MainActivity extends AppCompatActivity implements FragmentClicksLis
     public static final int FRAGMENT_AMOUNT = 0;
     public static final int FRAGMENT_METHOD = 1;
     public static final int FRAGMENT_BANK = 2;
+    public static final int FRAGMENT_ISSUER_QUOTAS = 3;
 
     @Override
     protected void onCreate(Bundle savedInstanceState)

@@ -1,18 +1,21 @@
 package com.example.dan.paymentapp.models;
 
+import com.google.gson.annotations.SerializedName;
+
 import java.util.List;
 
 public class PaymentIssuer
 {
-    private List<PaymentIssuerQuota> payer_costs;
+    @SerializedName("payer_costs")
+    private List<PaymentIssuerQuota> payerCosts;
 
-    public List<PaymentIssuerQuota> getPayer_costs()
+    public List<PaymentIssuerQuota> getPayerCosts()
     {
-        return payer_costs;
+        return payerCosts;
     }
 
-    public void setPayer_costs(List<PaymentIssuerQuota> payer_costs)
+    public void setPayerCosts(List<PaymentIssuerQuota> payerCosts)
     {
-        this.payer_costs = payer_costs;
+        this.payerCosts = payerCosts;
     }
 }
