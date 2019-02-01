@@ -4,6 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools">
 
     <data>
+        <import type="android.databinding.ObservableField"/>
 
         <variable
             name="id"
@@ -52,7 +53,7 @@
             app:layout_constraintRight_toRightOf="parent"
             android:textSize="24sp"
             tools:text="3 cuotas de $3.900"
-            android:text="@{model.recommendedMessage}"/>
+            android:text="@{model.message}"/>
 
         <include
             android:id="@+id/buttons"

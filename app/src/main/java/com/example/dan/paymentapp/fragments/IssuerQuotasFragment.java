@@ -94,21 +94,21 @@ public class IssuerQuotasFragment extends BaseFragment
     {
         MPPaymentService service = RetrofitClient.getRetrofitInstance().create(MPPaymentService.class);
 
-        Call<PaymentIssuer> call = service.getPaymentIssuerQuotasInfo(getString(R.string.mp_public_key),
+        Call<List<PaymentIssuer>> call = service.getPaymentIssuerQuotasInfo(getString(R.string.mp_public_key),
                 "visa",
                 20000,
                 288);
 
-        call.enqueue(new Callback<PaymentIssuer>()
+        call.enqueue(new Callback<List<PaymentIssuer>>()
         {
             @Override
-            public void onResponse(Call<PaymentIssuer> call, Response<PaymentIssuer> response)
+            public void onResponse(Call<List<PaymentIssuer>> call, Response<List<PaymentIssuer>> response)
             {
-                setQuotasSpinner(response.body());
+                setQuotasSpinner(response.body().get(0));
             }
 
             @Override
-            public void onFailure(Call<PaymentIssuer> call, Throwable t)
+            public void onFailure(Call<List<PaymentIssuer>> call, Throwable t)
             {
 
             }
@@ -127,7 +127,7 @@ public class IssuerQuotasFragment extends BaseFragment
                 PaymentIssuerQuota quota = (PaymentIssuerQuota) parent.getItemAtPosition(position);
 
                 // Set the new recommended message to show
-                mBindModel.recommendedMesage.set(quota.getRecommendedMessage());
+                mBindModel.message.set(quota.getRecommendedMessage());
             }
 
             @Override

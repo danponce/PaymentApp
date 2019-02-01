@@ -9,8 +9,8 @@
     <string name="payment_bank_title">Selecciona el Banco</string>
     <string name="payment_quotas_title">Selecciona la cantidad de cuotas</string>
 
-    <string name="payment_quota">Cuota</string>
-    <string name="payment_quotas">Cuotas</string>
+    <string name="payment_quota">cuota</string>
+    <string name="payment_quotas">cuotas</string>
 
     <string name="mp_public_key">444a9ef5-8a6b-429f-abdf-587639155d88</string>
 </resources>

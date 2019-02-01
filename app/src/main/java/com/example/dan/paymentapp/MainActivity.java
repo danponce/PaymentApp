@@ -7,6 +7,7 @@ import android.os.Bundle;
 
 import com.example.dan.paymentapp.fragments.AmountFragment;
 import com.example.dan.paymentapp.fragments.BankFragment;
+import com.example.dan.paymentapp.fragments.IssuerQuotasFragment;
 import com.example.dan.paymentapp.fragments.MethodFragment;
 
 public class MainActivity extends AppCompatActivity implements FragmentClicksListener
@@ -61,6 +62,8 @@ public class MainActivity extends AppCompatActivity implements FragmentClicksLis
             case FRAGMENT_AMOUNT : return MethodFragment.newInstance("", "");
 
             case FRAGMENT_METHOD : return BankFragment.newInstance("", "");
+            
+            case FRAGMENT_BANK : return IssuerQuotasFragment.newInstance("", "");
 
             default: return null;
         }

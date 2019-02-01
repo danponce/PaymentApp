@@ -2,6 +2,8 @@ package com.example.dan.paymentapp.adapters;
 
 import android.content.Context;
 import android.databinding.DataBindingUtil;
+import android.support.annotation.NonNull;
+import android.support.annotation.Nullable;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -47,5 +49,11 @@ public class PaymentQuotasArrayAdapter extends ArrayAdapter<PaymentIssuerQuota> 
         binding.setQuota(getItem(position));
 
         return binding.getRoot();
+    }
+
+    @Override
+    public View getDropDownView(int position, @Nullable View convertView, @NonNull ViewGroup parent)
+    {
+        return getView(position, convertView, parent);
     }
 }

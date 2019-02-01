@@ -4,5 +4,5 @@ import android.databinding.ObservableField;
 
 public class IssuerBindModel
 {
-    public final ObservableField<String> recommendedMesage = new ObservableField<String>();
+    public final ObservableField<String> message = new ObservableField<>();
 }
