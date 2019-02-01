@@ -1,7 +1,10 @@
 package com.example.dan.paymentapp.fragments;
 
 
+import android.arch.lifecycle.ViewModelProviders;
 import android.os.Bundle;
+import android.support.annotation.NonNull;
+import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
@@ -13,6 +16,7 @@ import com.example.dan.paymentapp.MainActivity;
 import com.example.dan.paymentapp.R;
 import com.example.dan.paymentapp.adapters.PaymentBankRecyclerAdapter;
 import com.example.dan.paymentapp.databinding.FragmentBankBinding;
+import com.example.dan.paymentapp.models.BankViewModel;
 import com.example.dan.paymentapp.models.PaymentBank;
 import com.example.dan.paymentapp.network.MPPaymentService;
 import com.example.dan.paymentapp.network.RetrofitClient;
@@ -40,6 +44,8 @@ public class BankFragment extends BaseFragment
     private String mParam2;
 
     private FragmentBankBinding mBinding;
+
+    private BankViewModel mBankViewModel;
 
     public BankFragment()
     {
@@ -82,9 +88,22 @@ public class BankFragment extends BaseFragment
     {
         mBinding = FragmentBankBinding.inflate(inflater, container, false);
 
-        getPaymentBanks();
+        mBinding.setId(getFragmentId());
+
+        mBankViewModel = ViewModelProviders.of(this).get(BankViewModel.class);
 
         return mBinding.getRoot();
+    }
+
+    @Override
+    public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState)
+    {
+        super.onViewCreated(view, savedInstanceState);
+
+        if(mBankViewModel.getPaymentBankList() == null)
+            getPaymentBanks();
+        else
+            setPaymentBankRecyclerView(mBankViewModel.getPaymentBankList());
     }
 
     private void getPaymentBanks()

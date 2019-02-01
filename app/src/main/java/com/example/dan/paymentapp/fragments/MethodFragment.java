@@ -1,7 +1,10 @@
 package com.example.dan.paymentapp.fragments;
 
+import android.arch.lifecycle.ViewModelProviders;
 import android.databinding.DataBindingUtil;
 import android.os.Bundle;
+import android.support.annotation.NonNull;
+import android.support.annotation.Nullable;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
@@ -10,6 +13,7 @@ import android.view.ViewGroup;
 
 import com.example.dan.paymentapp.FragmentClicksListener;
 import com.example.dan.paymentapp.MainActivity;
+import com.example.dan.paymentapp.models.MethodViewModel;
 import com.example.dan.paymentapp.models.PaymentMethod;
 import com.example.dan.paymentapp.R;
 import com.example.dan.paymentapp.adapters.PaymentMethodRecyclerAdapter;
@@ -40,6 +44,8 @@ public class MethodFragment extends BaseFragment
     private FragmentClicksListener mListener;
 
     private FragmentMethodBinding mBinding;
+
+    private MethodViewModel mMethodViewModel;
 
     public MethodFragment()
     {
@@ -84,9 +90,20 @@ public class MethodFragment extends BaseFragment
 
         mBinding.setId(MainActivity.FRAGMENT_METHOD);
 
-        getPaymentMethods();
+        mMethodViewModel = ViewModelProviders.of(this).get(MethodViewModel.class);
 
         return mBinding.getRoot();
+    }
+
+    @Override
+    public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState)
+    {
+        super.onViewCreated(view, savedInstanceState);
+
+        if(mMethodViewModel.getPaymentMethodList() == null)
+            getPaymentMethods();
+        else
+            setPaymentMethodRecyclerView(mMethodViewModel.getPaymentMethodList());
     }
 
     private void getPaymentMethods()
