@@ -119,6 +119,15 @@ public class BankFragment extends BaseFragment implements BankRecyclerClickListe
             @Override
             public void onResponse(Call<List<PaymentBank>> call, Response<List<PaymentBank>> response)
             {
+                if(response.body() == null)
+                    return;
+
+                // Check if user previuosly select a bank
+                PaymentBank selectedBank = mMPDataViewModel.getBank();
+
+                if(selectedBank != null)
+                    checkPreviouslySelectedBank(selectedBank.getId(), response.body());
+
                 setPaymentBankRecyclerView(response.body());
             }
 
@@ -128,6 +137,13 @@ public class BankFragment extends BaseFragment implements BankRecyclerClickListe
 
             }
         });
+    }
+
+    private void checkPreviouslySelectedBank(int bankId, List<PaymentBank> bankList)
+    {
+        for (PaymentBank bank : bankList)
+            if(bank.getId() == bankId)
+                bank.isSelected.set(true);
     }
 
     private void setPaymentBankRecyclerView(List<PaymentBank> paymentBankList)

@@ -128,6 +128,15 @@ public class MethodFragment extends BaseFragment implements MethodRecyclerClickL
             @Override
             public void onResponse(Call<List<PaymentMethod>> call, Response<List<PaymentMethod>> response)
             {
+                if(response.body() == null)
+                    return;
+
+                // Check if user previously selected a method
+                PaymentMethod selectedMethod = mMPDataViewModel.getMethod();
+
+                if(selectedMethod != null)
+                    checkSelectedMethod(selectedMethod.getId(), response.body());
+
                 setPaymentMethodRecyclerView(response.body());
             }
 
@@ -137,6 +146,13 @@ public class MethodFragment extends BaseFragment implements MethodRecyclerClickL
 
             }
         });
+    }
+
+    private void checkSelectedMethod(String selectedMethod, List<PaymentMethod> methodList)
+    {
+        for (PaymentMethod method : methodList)
+            if(method.getId().equalsIgnoreCase(selectedMethod))
+                method.isSelected.set(true);
     }
 
     @Override
