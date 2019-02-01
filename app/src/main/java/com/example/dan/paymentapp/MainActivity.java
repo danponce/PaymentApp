@@ -46,19 +46,22 @@ public class MainActivity extends AppCompatActivity implements FragmentClicksLis
     @Override
     public void previousFragment(int fragmentId)
     {
-
+        replaceFragment(getPreviousFragment(fragmentId));
     }
 
     @Override
     public void nextFragment(int fragmentId)
     {
+        replaceFragment(getNextFragment(fragmentId));
+    }
+
+    private void replaceFragment(Fragment fragment)
+    {
         FragmentTransaction fragmentTransaction = getSupportFragmentManager().beginTransaction();
 
-        Fragment nextFragment = getNextFragment(fragmentId);
-
-        if(nextFragment != null)
+        if(fragment != null)
         {
-            fragmentTransaction.replace(R.id.container, getNextFragment(fragmentId));
+            fragmentTransaction.replace(R.id.container, fragment);
             fragmentTransaction.commitAllowingStateLoss();
         }
     }
@@ -72,6 +75,20 @@ public class MainActivity extends AppCompatActivity implements FragmentClicksLis
             case FRAGMENT_METHOD : return BankFragment.newInstance("", "");
             
             case FRAGMENT_BANK : return IssuerQuotasFragment.newInstance("", "");
+
+            default: return null;
+        }
+    }
+
+    private Fragment getPreviousFragment(int fragmentId)
+    {
+        switch (fragmentId)
+        {
+            case FRAGMENT_METHOD : return AmountFragment.newInstance("", "");
+
+            case FRAGMENT_BANK : return MethodFragment.newInstance("", "");
+
+            case FRAGMENT_ISSUER_QUOTAS : return BankFragment.newInstance("", "");
 
             default: return null;
         }
