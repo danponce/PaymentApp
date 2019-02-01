@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout>
+
+    <data>
+
+        <variable
+            name="quota"
+            type="com.example.dan.paymentapp.models.PaymentIssuerQuota" />
+    </data>
+
+    <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:orientation="horizontal"
+        android:padding="6dp">
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@{quota.installments + (quota.installments == 0 ? @string/payment_quota : @string/payment_quotas)}"/>
+
+    </LinearLayout>
+</layout>

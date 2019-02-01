@@ -2,6 +2,7 @@ package com.example.dan.paymentapp.fragments;
 
 
 import android.os.Bundle;
+import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -9,6 +10,17 @@ import android.view.ViewGroup;
 
 import com.example.dan.paymentapp.MainActivity;
 import com.example.dan.paymentapp.R;
+import com.example.dan.paymentapp.adapters.PaymentQuotasArrayAdapter;
+import com.example.dan.paymentapp.databinding.FragmentIssuerQuotasBinding;
+import com.example.dan.paymentapp.models.PaymentIssuer;
+import com.example.dan.paymentapp.network.MPPaymentService;
+import com.example.dan.paymentapp.network.RetrofitClient;
+
+import java.util.List;
+
+import retrofit2.Call;
+import retrofit2.Callback;
+import retrofit2.Response;
 
 /**
  * Screen for selecting the number of quotas (installments)
@@ -23,6 +35,8 @@ public class IssuerQuotasFragment extends BaseFragment
     // TODO: Rename and change types of parameters
     private String mParam1;
     private String mParam2;
+
+    private FragmentIssuerQuotasBinding mBinding;
 
 
     public IssuerQuotasFragment()
@@ -64,8 +78,48 @@ public class IssuerQuotasFragment extends BaseFragment
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState)
     {
-        // Inflate the layout for this fragment
-        return inflater.inflate(R.layout.fragment_issuer_quotas, container, false);
+        mBinding = FragmentIssuerQuotasBinding.inflate(inflater, container, false);
+
+        return mBinding.getRoot();
+    }
+
+    @Override
+    public void onActivityCreated(@Nullable Bundle savedInstanceState)
+    {
+        super.onActivityCreated(savedInstanceState);
+
+        getIssuerQuotas();
+    }
+
+    private void getIssuerQuotas()
+    {
+        MPPaymentService service = RetrofitClient.getRetrofitInstance().create(MPPaymentService.class);
+
+        Call<PaymentIssuer> call = service.getPaymentIssuerQuotasInfo(getString(R.string.mp_public_key),
+                "visa",
+                20000,
+                288);
+
+        call.enqueue(new Callback<PaymentIssuer>()
+        {
+            @Override
+            public void onResponse(Call<PaymentIssuer> call, Response<PaymentIssuer> response)
+            {
+                setQuotasSpinner(response.body());
+            }
+
+            @Override
+            public void onFailure(Call<PaymentIssuer> call, Throwable t)
+            {
+
+            }
+        });
+
+    }
+
+    private void setQuotasSpinner(PaymentIssuer issuer)
+    {
+        mBinding.quotasSpinner.setAdapter(new PaymentQuotasArrayAdapter(getActivity(), R.layout.item_quota, issuer.getPayerCosts()));
     }
 
     @Override
