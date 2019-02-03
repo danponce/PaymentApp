@@ -13,10 +13,7 @@
     <android.support.constraint.ConstraintLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:layout_marginTop="@dimen/activity_vertical_margin"
-        android:layout_marginBottom="@dimen/activity_vertical_margin"
-        android:layout_marginLeft="@dimen/activity_horizontal_margin"
-        android:layout_marginRight="@dimen/activity_horizontal_margin"
+        android:paddingTop="@dimen/activity_vertical_margin"
         android:background="@color/white"
         tools:context=".fragments.MethodFragment">
 
@@ -25,6 +22,8 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:textSize="@dimen/payment_title_text_size"
+            android:layout_marginLeft="@dimen/activity_horizontal_margin"
+            android:layout_marginRight="@dimen/activity_horizontal_margin"
             android:text="@string/payment_method_title"
             app:layout_constraintTop_toTopOf="parent"
             android:layout_marginBottom="18dp"/>
@@ -33,6 +32,8 @@
             android:id="@+id/method_rv"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            android:layout_marginLeft="@dimen/activity_horizontal_margin"
+            android:layout_marginRight="@dimen/activity_horizontal_margin"
             android:gravity="center_horizontal"
             android:background="@color/md_grey_200"
             app:layout_constrainedHeight="true"
