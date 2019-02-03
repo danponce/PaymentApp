@@ -32,7 +32,7 @@
             android:text="@string/payment_bank_title"
             app:layout_constraintTop_toTopOf="parent"
             android:layout_marginBottom="18dp"
-            android:visibility="@{bindModel.isLoading ? View.GONE : View.VISIBLE}"/>
+            android:visibility="@{bindModel.isLoading | bindModel.isListEmpty ? View.GONE : View.VISIBLE}"/>
 
         <android.support.v7.widget.RecyclerView
             android:id="@+id/bank_rv"
@@ -47,7 +47,7 @@
             app:layout_constraintLeft_toLeftOf="parent"
             app:layout_constraintRight_toRightOf="parent"
             app:layout_constraintBottom_toTopOf="@id/buttons"
-            android:visibility="@{bindModel.isLoading ? View.GONE : View.VISIBLE}"/>
+            android:visibility="@{bindModel.isLoading | bindModel.isListEmpty ? View.GONE : View.VISIBLE}"/>
 
         <ProgressBar
             android:layout_width="wrap_content"
@@ -58,12 +58,39 @@
             app:layout_constraintRight_toRightOf="parent"
             android:visibility="@{bindModel.isLoading ? View.VISIBLE : View.GONE}" />
 
+        <LinearLayout
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            android:gravity="center_horizontal"
+            android:padding="54dp"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintLeft_toLeftOf="parent"
+            app:layout_constraintRight_toRightOf="parent"
+            android:visibility="@{bindModel.isListEmpty ? View.VISIBLE : View.GONE}">
+
+            <ImageView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:src="@drawable/ic_empty_box_128dp"
+                android:layout_marginBottom="12dp"/>
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textSize="19sp"
+                android:text="@string/empty_bank_list_message"/>
+
+        </LinearLayout>
+
         <include
             android:id="@+id/buttons"
             layout="@layout/layout_buttons"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             app:id="@{id}"
+            app:bindModel="@{bindModel}"
             app:layout_constraintBottom_toBottomOf="parent" />
 
     </android.support.constraint.ConstraintLayout>

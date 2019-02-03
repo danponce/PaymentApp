@@ -10,6 +10,8 @@
     <string name="payment_quota">cuota</string>
     <string name="payment_quotas">cuotas</string>
 
+    <string name="empty_bank_list_message">No hay bancos disponibles para el método seleccionado. Vuelve atrás y selecciona otro por favor</string>
+
     <string name="mp_public_key">444a9ef5-8a6b-429f-abdf-587639155d88</string>
 
     <string name="back_btn">Atrás</string>

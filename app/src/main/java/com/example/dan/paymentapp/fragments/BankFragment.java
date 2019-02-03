@@ -161,6 +161,12 @@ public class BankFragment extends BaseFragment implements BankRecyclerClickListe
 
     private void setPaymentBankRecyclerView(List<PaymentBank> paymentBankList)
     {
+        if(paymentBankList.isEmpty())
+        {
+            mBindModel.isListEmpty.set(true);
+            return;
+        }
+
         RecyclerView methodsRecyclerView = mBinding.bankRv;
 
         methodsRecyclerView.setLayoutManager(new LinearLayoutManager(getContext()));
