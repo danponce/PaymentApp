@@ -1,11 +1,9 @@
 package com.example.dan.paymentapp.fragments;
 
 
-import android.arch.lifecycle.ViewModelProvider;
 import android.arch.lifecycle.ViewModelProviders;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
-import android.support.v4.app.Fragment;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -15,9 +13,9 @@ import com.example.dan.paymentapp.MainActivity;
 import com.example.dan.paymentapp.R;
 import com.example.dan.paymentapp.adapters.PaymentQuotasArrayAdapter;
 import com.example.dan.paymentapp.databinding.FragmentIssuerQuotasBinding;
-import com.example.dan.paymentapp.models.IssuerBindModel;
-import com.example.dan.paymentapp.models.IssuerQuotasViewModel;
-import com.example.dan.paymentapp.models.MPDataViewModel;
+import com.example.dan.paymentapp.models.viewmodels.IssuerBindModel;
+import com.example.dan.paymentapp.models.viewmodels.IssuerQuotasViewModel;
+import com.example.dan.paymentapp.models.viewmodels.MPDataViewModel;
 import com.example.dan.paymentapp.models.PaymentIssuer;
 import com.example.dan.paymentapp.models.PaymentIssuerQuota;
 import com.example.dan.paymentapp.network.MPPaymentService;

@@ -1,8 +1,12 @@
-package com.example.dan.paymentapp.models;
+package com.example.dan.paymentapp.models.viewmodels;
 
 import android.arch.lifecycle.ViewModel;
 import android.databinding.ObservableField;
 import android.databinding.ObservableInt;
+
+import com.example.dan.paymentapp.models.PaymentBank;
+import com.example.dan.paymentapp.models.PaymentIssuerQuota;
+import com.example.dan.paymentapp.models.PaymentMethod;
 
 public class MPDataViewModel extends ViewModel
 {

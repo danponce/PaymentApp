@@ -1,6 +1,8 @@
-package com.example.dan.paymentapp.models;
+package com.example.dan.paymentapp.models.viewmodels;
 
 import android.arch.lifecycle.ViewModel;
+
+import com.example.dan.paymentapp.models.PaymentMethod;
 
 import java.util.List;
 

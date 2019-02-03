@@ -12,7 +12,7 @@
 
         <variable
             name="model"
-            type="com.example.dan.paymentapp.models.IssuerBindModel"/>
+            type="com.example.dan.paymentapp.models.viewmodels.IssuerBindModel"/>
     </data>
 
     <android.support.constraint.ConstraintLayout

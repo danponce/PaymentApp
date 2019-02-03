@@ -10,7 +10,7 @@ import com.example.dan.paymentapp.fragments.AmountFragment;
 import com.example.dan.paymentapp.fragments.BankFragment;
 import com.example.dan.paymentapp.fragments.IssuerQuotasFragment;
 import com.example.dan.paymentapp.fragments.MethodFragment;
-import com.example.dan.paymentapp.models.MPDataViewModel;
+import com.example.dan.paymentapp.models.viewmodels.MPDataViewModel;
 
 public class MainActivity extends AppCompatActivity implements FragmentClicksListener
 {
