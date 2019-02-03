@@ -4,10 +4,15 @@
     xmlns:tools="http://schemas.android.com/tools">
 
     <data>
+        <import type="android.view.View"/>
 
         <variable
             name="id"
             type="int" />
+
+        <variable
+            name="bindModel"
+            type="com.example.dan.paymentapp.models.bind.GeneralBindModel"/>
     </data>
 
     <android.support.constraint.ConstraintLayout
@@ -18,6 +23,7 @@
         tools:context=".fragments.MethodFragment">
 
         <TextView
+            android:visibility="@{bindModel.isLoading ? View.GONE : View.VISIBLE}"
             android:id="@+id/title_tv"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
@@ -29,6 +35,7 @@
             android:layout_marginBottom="18dp"/>
 
         <android.support.v7.widget.RecyclerView
+            android:visibility="@{bindModel.isLoading ? View.GONE : View.VISIBLE}"
             android:id="@+id/method_rv"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
@@ -41,6 +48,15 @@
             app:layout_constraintLeft_toLeftOf="parent"
             app:layout_constraintRight_toRightOf="parent"
             app:layout_constraintBottom_toTopOf="@id/buttons"/>
+
+        <ProgressBar
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintLeft_toLeftOf="parent"
+            app:layout_constraintRight_toRightOf="parent"
+            android:visibility="@{bindModel.isLoading ? View.VISIBLE : View.GONE}" />
 
         <include
             android:id="@+id/buttons"

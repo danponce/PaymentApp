@@ -14,6 +14,7 @@ import android.view.ViewGroup;
 import com.example.dan.paymentapp.FragmentClicksListener;
 import com.example.dan.paymentapp.MainActivity;
 import com.example.dan.paymentapp.adapters.MethodRecyclerClickListener;
+import com.example.dan.paymentapp.models.bind.GeneralBindModel;
 import com.example.dan.paymentapp.models.viewmodels.MPDataViewModel;
 import com.example.dan.paymentapp.models.viewmodels.MethodViewModel;
 import com.example.dan.paymentapp.models.PaymentMethod;
@@ -50,6 +51,8 @@ public class MethodFragment extends BaseFragment implements MethodRecyclerClickL
     private MethodViewModel mMethodViewModel;
     private MPDataViewModel mMPDataViewModel;
 
+    private GeneralBindModel mBindModel;
+
     public MethodFragment()
     {
         // Required empty public constructor
@@ -84,6 +87,8 @@ public class MethodFragment extends BaseFragment implements MethodRecyclerClickL
             mParam2 = getArguments().getString(ARG_PARAM2);
         }
 
+        mBindModel = new GeneralBindModel();
+
         mMPDataViewModel = ViewModelProviders.of(getActivity()).get(MPDataViewModel.class);
     }
 
@@ -94,6 +99,7 @@ public class MethodFragment extends BaseFragment implements MethodRecyclerClickL
         mBinding = DataBindingUtil.inflate(inflater, R.layout.fragment_method, container, false);
 
         mBinding.setId(MainActivity.FRAGMENT_METHOD);
+        mBinding.setBindModel(mBindModel);
 
         mMethodViewModel = ViewModelProviders.of(this).get(MethodViewModel.class);
 
@@ -115,11 +121,18 @@ public class MethodFragment extends BaseFragment implements MethodRecyclerClickL
         if(mMethodViewModel.getPaymentMethodList() == null)
             getPaymentMethods();
         else
+        {
             setPaymentMethodRecyclerView(mMethodViewModel.getPaymentMethodList());
+
+            mBindModel.isLoading.set(false);
+        }
     }
 
     private void getPaymentMethods()
     {
+        // Show progress bar instead all other layout elements
+        mBindModel.isLoading.set(true);
+
         MPPaymentService service = RetrofitClient.getRetrofitInstance().create(MPPaymentService.class);
 
         Call<List<PaymentMethod>> call = service.getPaymentMethods(getString(R.string.mp_public_key));
@@ -138,12 +151,14 @@ public class MethodFragment extends BaseFragment implements MethodRecyclerClickL
                     checkSelectedMethod(selectedMethod.getId(), response.body());
 
                 setPaymentMethodRecyclerView(response.body());
+
+                mBindModel.isLoading.set(false);
             }
 
             @Override
             public void onFailure(Call<List<PaymentMethod>> call, Throwable t)
             {
-
+                mBindModel.isLoading.set(false);
             }
         });
     }
