@@ -17,6 +17,7 @@ import com.example.dan.paymentapp.R;
 import com.example.dan.paymentapp.adapters.BankRecyclerClickListener;
 import com.example.dan.paymentapp.adapters.PaymentBankRecyclerAdapter;
 import com.example.dan.paymentapp.databinding.FragmentBankBinding;
+import com.example.dan.paymentapp.models.bind.GeneralBindModel;
 import com.example.dan.paymentapp.models.viewmodels.BankViewModel;
 import com.example.dan.paymentapp.models.viewmodels.MPDataViewModel;
 import com.example.dan.paymentapp.models.PaymentBank;
@@ -50,6 +51,8 @@ public class BankFragment extends BaseFragment implements BankRecyclerClickListe
     private BankViewModel mBankViewModel;
     private MPDataViewModel mMPDataViewModel;
 
+    private GeneralBindModel mBindModel;
+
     public BankFragment()
     {
         // Required empty public constructor
@@ -75,6 +78,7 @@ public class BankFragment extends BaseFragment implements BankRecyclerClickListe
             mParam2 = getArguments().getString(ARG_PARAM2);
         }
 
+        mBindModel = new GeneralBindModel();
         mMPDataViewModel = ViewModelProviders.of(getActivity()).get(MPDataViewModel.class);
     }
 
@@ -85,6 +89,7 @@ public class BankFragment extends BaseFragment implements BankRecyclerClickListe
         mBinding = FragmentBankBinding.inflate(inflater, container, false);
 
         mBinding.setId(getFragmentId());
+        mBinding.setBindModel(mBindModel);
 
         mBankViewModel = ViewModelProviders.of(this).get(BankViewModel.class);
 
@@ -99,7 +104,10 @@ public class BankFragment extends BaseFragment implements BankRecyclerClickListe
         if(mBankViewModel.getPaymentBankList() == null)
             getPaymentBanks();
         else
+        {
             setPaymentBankRecyclerView(mBankViewModel.getPaymentBankList());
+            mBindModel.isLoading.set(false);
+        }
     }
 
     @Override
@@ -111,6 +119,9 @@ public class BankFragment extends BaseFragment implements BankRecyclerClickListe
 
     private void getPaymentBanks()
     {
+        // Show only progress bar and hide all other views
+        mBindModel.isLoading.set(true);
+
         MPPaymentService service = RetrofitClient.getRetrofitInstance().create(MPPaymentService.class);
 
         Call<List<PaymentBank>> call = service.getPaymentBanks(getString(R.string.mp_public_key), mMPDataViewModel.paymentMethod.get());
@@ -129,12 +140,14 @@ public class BankFragment extends BaseFragment implements BankRecyclerClickListe
                     checkPreviouslySelectedBank(selectedBank.getId(), response.body());
 
                 setPaymentBankRecyclerView(response.body());
+
+                mBindModel.isLoading.set(false);
             }
 
             @Override
             public void onFailure(Call<List<PaymentBank>> call, Throwable t)
             {
-
+                mBindModel.isLoading.set(false);
             }
         });
     }

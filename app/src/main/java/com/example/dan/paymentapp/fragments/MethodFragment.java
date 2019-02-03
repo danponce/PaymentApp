@@ -7,9 +7,11 @@ import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Toast;
 
 import com.example.dan.paymentapp.FragmentClicksListener;
 import com.example.dan.paymentapp.MainActivity;
@@ -158,6 +160,7 @@ public class MethodFragment extends BaseFragment implements MethodRecyclerClickL
             @Override
             public void onFailure(Call<List<PaymentMethod>> call, Throwable t)
             {
+                Log.e("Call Error",  "Problem: " + t.getMessage());
                 mBindModel.isLoading.set(false);
             }
         });

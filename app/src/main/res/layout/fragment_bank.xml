@@ -4,10 +4,15 @@
     xmlns:tools="http://schemas.android.com/tools">
 
     <data>
+        <import type="android.view.View"/>
 
         <variable
             name="id"
             type="int" />
+
+        <variable
+            name="bindModel"
+            type="com.example.dan.paymentapp.models.bind.GeneralBindModel"/>
     </data>
 
     <android.support.constraint.ConstraintLayout
@@ -26,7 +31,8 @@
             android:layout_marginRight="@dimen/activity_horizontal_margin"
             android:text="@string/payment_bank_title"
             app:layout_constraintTop_toTopOf="parent"
-            android:layout_marginBottom="18dp"/>
+            android:layout_marginBottom="18dp"
+            android:visibility="@{bindModel.isLoading ? View.GONE : View.VISIBLE}"/>
 
         <android.support.v7.widget.RecyclerView
             android:id="@+id/bank_rv"
@@ -40,7 +46,17 @@
             app:layout_constraintTop_toBottomOf="@id/title_tv"
             app:layout_constraintLeft_toLeftOf="parent"
             app:layout_constraintRight_toRightOf="parent"
-            app:layout_constraintBottom_toTopOf="@id/buttons"/>
+            app:layout_constraintBottom_toTopOf="@id/buttons"
+            android:visibility="@{bindModel.isLoading ? View.GONE : View.VISIBLE}"/>
+
+        <ProgressBar
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintLeft_toLeftOf="parent"
+            app:layout_constraintRight_toRightOf="parent"
+            android:visibility="@{bindModel.isLoading ? View.VISIBLE : View.GONE}" />
 
         <include
             android:id="@+id/buttons"

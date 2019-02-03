@@ -9,4 +9,5 @@ import android.databinding.ObservableBoolean;
 public class GeneralBindModel
 {
     public final ObservableBoolean isLoading = new ObservableBoolean();
+    public final ObservableBoolean isListEmpty = new ObservableBoolean();
 }
