@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
-<layout>
+<layout xmlns:app="http://schemas.android.com/apk/res-auto">
 
     <data>
         <import type="android.view.View"/>
@@ -16,20 +16,64 @@
         android:padding="6dp">
 
         <!-- If fragment id is equal to amount fragment then don't show previous button -->
-        <ImageView
+        <android.support.v7.widget.CardView
             android:id="@+id/back_btn"
-            android:visibility="@{id == 0 ? View.INVISIBLE : View.VISIBLE}"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
-            android:layout_weight="1"
-            android:src="@drawable/ic_arrow_back_black_24dp" />
+            app:cardElevation="1dp"
+            android:foreground="?android:attr/selectableItemBackground"
+            android:clickable="true"
+            android:visibility="@{id == 0 ? View.INVISIBLE : View.VISIBLE}">
 
-        <ImageView
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="vertical"
+                android:gravity="center_horizontal">
+
+                <ImageView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:src="@drawable/ic_arrow_back_black_24dp" />
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="@string/back_btn"/>
+
+            </LinearLayout>
+
+        </android.support.v7.widget.CardView>
+
+        <android.support.v7.widget.CardView
             android:id="@+id/next_btn"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_weight="1"
-            android:src="@drawable/ic_arrow_forward_black_24dp" />
+            app:cardElevation="1dp"
+            android:foreground="?android:attr/selectableItemBackground"
+            android:clickable="true"
+            android:visibility="@{id == 0 ? View.INVISIBLE : View.VISIBLE}">
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="vertical"
+                android:gravity="center_horizontal">
+
+                <ImageView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:src="@drawable/ic_arrow_forward_black_24dp" />
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="@string/back_btn"/>
+
+            </LinearLayout>
+
+        </android.support.v7.widget.CardView>
 
     </LinearLayout>
 
