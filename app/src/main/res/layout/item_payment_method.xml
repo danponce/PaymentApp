@@ -47,7 +47,7 @@
                 android:textSize="19sp"
                 android:layout_centerVertical="true"
                 android:layout_marginLeft="8dp"
-                android:textColor="@{method.isSelected ? @color/white : @color/md_grey_600}"
+                android:textColor="@{method.isSelected ? @color/white : @color/md_grey_500}"
                 android:text="@{method.name}"
                 tools:text="Visa" />
 

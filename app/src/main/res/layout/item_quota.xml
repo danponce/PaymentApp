@@ -17,6 +17,7 @@
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:textSize="19sp"
             android:text="@{quota.installments + ` ` + (quota.installments == 1 ? @string/payment_quota : @string/payment_quotas)}"/>
 
     </LinearLayout>
