@@ -8,6 +8,7 @@ import android.os.Bundle;
 
 import com.example.dan.paymentapp.fragments.AmountFragment;
 import com.example.dan.paymentapp.fragments.BankFragment;
+import com.example.dan.paymentapp.fragments.InitSummaryFragment;
 import com.example.dan.paymentapp.fragments.IssuerQuotasFragment;
 import com.example.dan.paymentapp.fragments.MethodFragment;
 import com.example.dan.paymentapp.models.viewmodels.MPDataViewModel;
@@ -70,11 +71,13 @@ public class MainActivity extends AppCompatActivity implements FragmentClicksLis
     {
         switch (fragmentId)
         {
-            case FRAGMENT_AMOUNT : return MethodFragment.newInstance("", "");
+            case FRAGMENT_AMOUNT : return MethodFragment.newInstance();
 
-            case FRAGMENT_METHOD : return BankFragment.newInstance("", "");
+            case FRAGMENT_METHOD : return BankFragment.newInstance();
             
-            case FRAGMENT_BANK : return IssuerQuotasFragment.newInstance("", "");
+            case FRAGMENT_BANK : return IssuerQuotasFragment.newInstance();
+
+            case FRAGMENT_ISSUER_QUOTAS : return InitSummaryFragment.newInstance();
 
             default: return null;
         }
@@ -84,11 +87,11 @@ public class MainActivity extends AppCompatActivity implements FragmentClicksLis
     {
         switch (fragmentId)
         {
-            case FRAGMENT_METHOD : return AmountFragment.newInstance("", "");
+            case FRAGMENT_METHOD : return AmountFragment.newInstance();
 
-            case FRAGMENT_BANK : return MethodFragment.newInstance("", "");
+            case FRAGMENT_BANK : return MethodFragment.newInstance();
 
-            case FRAGMENT_ISSUER_QUOTAS : return BankFragment.newInstance("", "");
+            case FRAGMENT_ISSUER_QUOTAS : return BankFragment.newInstance();
 
             default: return null;
         }
@@ -96,6 +99,6 @@ public class MainActivity extends AppCompatActivity implements FragmentClicksLis
 
     private Fragment getInitialFragment()
     {
-        return AmountFragment.newInstance("", "");
+        return InitSummaryFragment.newInstance();
     }
 }

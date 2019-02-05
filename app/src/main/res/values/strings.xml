@@ -16,6 +16,7 @@
 
     <string name="back_btn">Atrás</string>
     <string name="next_btn">Siguiente</string>
+    <string name="finish_btn">Finalizar</string>
 
     <!-- TODO: Remove or change this placeholder text -->
     <string name="hello_blank_fragment">Hello blank fragment</string>

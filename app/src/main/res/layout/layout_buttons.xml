@@ -71,12 +71,13 @@
                 <ImageView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:src="@drawable/ic_arrow_forward_black_24dp" />
+                    android:src="@drawable/ic_arrow_forward_black_24dp"
+                    android:visibility="@{id == 3 ? View.GONE : View.VISIBLE}"/>
 
                 <TextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="@string/next_btn"/>
+                    android:text="@{id == 3 ? @string/finish_btn : @string/next_btn}"/>
 
             </LinearLayout>
 
