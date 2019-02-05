@@ -30,10 +30,12 @@
             android:orientation="horizontal"
             app:layout_constraintTop_toTopOf="parent">
 
-            <View
+            <ImageView
                 android:layout_width="0dp"
                 android:layout_weight="1"
-                android:layout_height="1dp"/>
+                android:layout_height="wrap_content"
+                android:src="@drawable/ic_one_32dp"
+                android:alpha="0.3"/>
 
             <ImageView
                 android:id="@+id/step_iv"
@@ -43,15 +45,19 @@
                 android:transitionName="profile"
                 android:src="@drawable/ic_two_32dp" />
 
-            <View
+            <ImageView
                 android:layout_width="0dp"
                 android:layout_weight="1"
-                android:layout_height="1dp"/>
+                android:layout_height="wrap_content"
+                android:src="@drawable/ic_three_32dp"
+                android:alpha="0.3"/>
 
-            <View
+            <ImageView
                 android:layout_width="0dp"
                 android:layout_weight="1"
-                android:layout_height="1dp"/>
+                android:layout_height="wrap_content"
+                android:src="@drawable/ic_four_32dp"
+                android:alpha="0.3"/>
 
         </LinearLayout>
 
@@ -64,7 +70,7 @@
             android:layout_marginLeft="@dimen/activity_horizontal_margin"
             android:layout_marginRight="@dimen/activity_horizontal_margin"
             android:text="@string/payment_method_title"
-            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/numbers_container"
             android:layout_marginBottom="18dp"/>
 
         <android.support.v7.widget.RecyclerView

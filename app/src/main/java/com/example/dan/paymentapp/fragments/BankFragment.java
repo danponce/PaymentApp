@@ -2,9 +2,11 @@ package com.example.dan.paymentapp.fragments;
 
 
 import android.arch.lifecycle.ViewModelProviders;
+import android.os.Build;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
+import android.support.transition.TransitionInflater;
 import android.support.v4.app.Fragment;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
@@ -63,6 +65,10 @@ public class BankFragment extends BaseFragment implements BankRecyclerClickListe
 
         mBindModel = new GeneralBindModel();
         mMPDataViewModel = ViewModelProviders.of(getActivity()).get(MPDataViewModel.class);
+
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP)
+            setSharedElementEnterTransition(TransitionInflater.from(getContext()).inflateTransition(android.R.transition.move));
+
     }
 
     @Override

@@ -37,20 +37,26 @@
                 android:layout_height="wrap_content"
                 android:src="@drawable/ic_one_32dp" />
 
-            <View
+            <ImageView
                 android:layout_width="0dp"
                 android:layout_weight="1"
-                android:layout_height="1dp"/>
+                android:layout_height="wrap_content"
+                android:src="@drawable/ic_two_32dp"
+                android:alpha="0.3"/>
 
-            <View
+            <ImageView
                 android:layout_width="0dp"
                 android:layout_weight="1"
-                android:layout_height="1dp"/>
+                android:layout_height="wrap_content"
+                android:src="@drawable/ic_three_32dp"
+                android:alpha="0.3"/>
 
-            <View
+            <ImageView
                 android:layout_width="0dp"
                 android:layout_weight="1"
-                android:layout_height="1dp"/>
+                android:layout_height="wrap_content"
+                android:src="@drawable/ic_four_32dp"
+                android:alpha="0.3"/>
 
         </LinearLayout>
 
