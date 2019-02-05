@@ -50,8 +50,9 @@
                 <TextView
                     android:id="@+id/amount_tv"
                     android:layout_width="0dp"
+                    android:textColor="@color/md_grey_500"
                     android:layout_height="wrap_content"
-                    android:gravity="center_horizontal"
+                    android:gravity="center"
                     android:layout_marginBottom="@dimen/summary_title_margin_bottom"
                     app:layout_constraintTop_toTopOf="parent"
                     app:layout_constraintHorizontal_weight="1"
@@ -63,7 +64,6 @@
                 <TextView
                     android:id="@+id/amount_value_tv"
                     android:layout_width="0dp"
-                    android:gravity="center_horizontal"
                     android:layout_height="wrap_content"
                     app:layout_constraintHorizontal_weight="1"
                     app:layout_constraintLeft_toRightOf="@id/amount_tv"
@@ -75,9 +75,11 @@
                 <TextView
                     android:id="@+id/method_tv"
                     android:layout_width="0dp"
+                    android:layout_marginTop="@dimen/summary_title_margin_top"
+                    android:textColor="@color/md_grey_500"
+                    android:gravity="center"
                     android:layout_height="wrap_content"
                     android:layout_marginBottom="@dimen/summary_title_margin_bottom"
-                    android:gravity="center_horizontal"
                     app:layout_constraintTop_toBottomOf="@id/amount_tv"
                     app:layout_constraintHorizontal_weight="1"
                     app:layout_constraintLeft_toLeftOf="parent"
@@ -88,7 +90,6 @@
                 <TextView
                     android:id="@+id/method_value_tv"
                     android:layout_width="0dp"
-                    android:gravity="center_horizontal"
                     android:layout_height="wrap_content"
                     android:textSize="@dimen/summary_text_size"
                     app:layout_constraintTop_toTopOf="@id/method_tv"
@@ -101,9 +102,11 @@
                 <TextView
                     android:id="@+id/bank_tv"
                     android:layout_width="0dp"
+                    android:textColor="@color/md_grey_500"
+                    android:layout_marginTop="@dimen/summary_title_margin_top"
+                    android:gravity="center_horizontal"
                     android:layout_height="wrap_content"
                     android:layout_marginBottom="@dimen/summary_title_margin_bottom"
-                    android:gravity="center_horizontal"
                     app:layout_constraintTop_toBottomOf="@id/method_tv"
                     app:layout_constraintHorizontal_weight="1"
                     app:layout_constraintLeft_toLeftOf="parent"
@@ -114,7 +117,6 @@
                 <TextView
                     android:id="@+id/bank_value_tv"
                     android:layout_width="0dp"
-                    android:gravity="center_horizontal"
                     android:layout_height="wrap_content"
                     android:textSize="@dimen/summary_text_size"
                     app:layout_constraintTop_toTopOf="@id/bank_tv"
@@ -127,6 +129,8 @@
                 <TextView
                     android:id="@+id/quota_tv"
                     android:layout_width="0dp"
+                    android:textColor="@color/md_grey_500"
+                    android:layout_marginTop="@dimen/summary_title_margin_top"
                     android:layout_height="wrap_content"
                     android:layout_marginBottom="@dimen/summary_title_margin_bottom"
                     android:gravity="center_horizontal"
@@ -140,7 +144,6 @@
                 <TextView
                     android:id="@+id/quota_value_tv"
                     android:layout_width="0dp"
-                    android:gravity="center_horizontal"
                     android:layout_height="wrap_content"
                     android:textSize="@dimen/summary_text_size"
                     app:layout_constraintTop_toTopOf="@id/quota_tv"
@@ -163,7 +166,6 @@
                 <TextView
                     android:id="@+id/quota_message_value_tv"
                     android:layout_width="0dp"
-                    android:gravity="center_horizontal"
                     android:layout_height="wrap_content"
                     android:textSize="@dimen/summary_recommended_message_text_size"
                     app:layout_constraintTop_toBottomOf="@id/quota_value_tv"

@@ -8,5 +8,6 @@
 
     <dimen name="summary_text_size">20sp</dimen>
     <dimen name="summary_recommended_message_text_size">17sp</dimen>
-    <dimen name="summary_title_margin_bottom">12dp</dimen>
+    <dimen name="summary_title_margin_bottom">16dp</dimen>
+    <dimen name="summary_title_margin_top">12dp</dimen>
 </resources>
