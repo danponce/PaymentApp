@@ -1,5 +1,6 @@
 package com.example.dan.paymentapp.fragments;
 
+import android.arch.lifecycle.ViewModelProviders;
 import android.content.Context;
 import android.databinding.DataBindingUtil;
 import android.os.Bundle;
@@ -12,6 +13,7 @@ import com.example.dan.paymentapp.FragmentClicksListener;
 import com.example.dan.paymentapp.MainActivity;
 import com.example.dan.paymentapp.R;
 import com.example.dan.paymentapp.databinding.FragmentAmountBinding;
+import com.example.dan.paymentapp.models.viewmodels.MPDataViewModel;
 
 
 /**
@@ -31,6 +33,8 @@ public class AmountFragment extends BaseFragment
     private FragmentClicksListener mListener;
 
     private FragmentAmountBinding mBinding;
+
+    private MPDataViewModel mMPDataViewModel;
 
     public AmountFragment()
     {
@@ -56,6 +60,8 @@ public class AmountFragment extends BaseFragment
             mParam1 = getArguments().getString(ARG_PARAM1);
             mParam2 = getArguments().getString(ARG_PARAM2);
         }
+
+        mMPDataViewModel = ViewModelProviders.of(getActivity()).get(MPDataViewModel.class);
     }
 
     @Override
@@ -64,6 +70,7 @@ public class AmountFragment extends BaseFragment
     {
         mBinding = DataBindingUtil.inflate(inflater, R.layout.fragment_amount, container, false);
         mBinding.setId(getFragmentId());
+        mBinding.setAmount(mMPDataViewModel.paymentAmmount);
 
         setClickListeners();
 

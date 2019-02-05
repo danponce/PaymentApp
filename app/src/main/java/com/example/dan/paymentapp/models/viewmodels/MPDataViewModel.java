@@ -11,6 +11,7 @@ import com.example.dan.paymentapp.models.PaymentMethod;
 public class MPDataViewModel extends ViewModel
 {
     public final ObservableField<String> paymentMethod = new ObservableField<>();
+    public final ObservableInt paymentAmmount = new ObservableInt();
     public final ObservableInt paymentBank = new ObservableInt();
     public final ObservableInt paymentIssuerQuotas = new ObservableInt();
     private PaymentBank bank;
