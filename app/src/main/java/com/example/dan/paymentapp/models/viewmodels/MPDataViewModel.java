@@ -1,6 +1,7 @@
 package com.example.dan.paymentapp.models.viewmodels;
 
 import android.arch.lifecycle.ViewModel;
+import android.databinding.ObservableBoolean;
 import android.databinding.ObservableField;
 import android.databinding.ObservableInt;
 
@@ -14,6 +15,7 @@ public class MPDataViewModel extends ViewModel
     public final ObservableInt paymentAmmount = new ObservableInt();
     public final ObservableInt paymentBank = new ObservableInt();
     public final ObservableInt paymentIssuerQuotas = new ObservableInt();
+    public final ObservableBoolean finishedPaymentProcess = new ObservableBoolean();
     private PaymentBank bank;
     private PaymentMethod method;
     private PaymentIssuerQuota quota;
