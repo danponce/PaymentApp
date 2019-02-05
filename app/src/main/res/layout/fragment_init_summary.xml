@@ -15,6 +15,7 @@
         xmlns:tools="http://schemas.android.com/tools"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
+        android:paddingTop="@dimen/activity_vertical_margin"
         tools:context=".fragments.InitSummaryFragment">
 
         <ImageView
@@ -32,6 +33,8 @@
         <android.support.v4.widget.NestedScrollView
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            android:layout_marginLeft="@dimen/activity_horizontal_margin"
+            android:layout_marginRight="@dimen/activity_horizontal_margin"
             app:layout_constraintBottom_toTopOf="@id/next_container"
             app:layout_constraintLeft_toLeftOf="parent"
             app:layout_constraintRight_toRightOf="parent"
@@ -39,17 +42,138 @@
             app:layout_constrainedHeight="true"
             android:visibility="@{model.isFinished ? View.VISIBLE : View.GONE}">
 
-            <LinearLayout
+            <android.support.constraint.ConstraintLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:orientation="vertical">
 
                 <TextView
-                    android:layout_width="wrap_content"
+                    android:id="@+id/amount_tv"
+                    android:layout_width="0dp"
                     android:layout_height="wrap_content"
-                    android:text="@{`Monto: ` + model.paymentAmmount}"/>
+                    android:gravity="center_horizontal"
+                    android:layout_marginBottom="@dimen/summary_title_margin_bottom"
+                    app:layout_constraintTop_toTopOf="parent"
+                    app:layout_constraintHorizontal_weight="1"
+                    app:layout_constraintLeft_toLeftOf="parent"
+                    app:layout_constraintHorizontal_chainStyle="spread"
+                    app:layout_constraintRight_toLeftOf="@id/amount_value_tv"
+                    android:text="@string/amount_title"/>
 
-            </LinearLayout>
+                <TextView
+                    android:id="@+id/amount_value_tv"
+                    android:layout_width="0dp"
+                    android:gravity="center_horizontal"
+                    android:layout_height="wrap_content"
+                    app:layout_constraintHorizontal_weight="1"
+                    app:layout_constraintLeft_toRightOf="@id/amount_tv"
+                    app:layout_constraintRight_toRightOf="parent"
+                    android:textSize="@dimen/summary_text_size"
+                    android:text="@{`$ ` + model.paymentAmmount}"
+                    tools:text="$ 20000"/>
+
+                <TextView
+                    android:id="@+id/method_tv"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_marginBottom="@dimen/summary_title_margin_bottom"
+                    android:gravity="center_horizontal"
+                    app:layout_constraintTop_toBottomOf="@id/amount_tv"
+                    app:layout_constraintHorizontal_weight="1"
+                    app:layout_constraintLeft_toLeftOf="parent"
+                    app:layout_constraintHorizontal_chainStyle="spread"
+                    app:layout_constraintRight_toLeftOf="@id/method_value_tv"
+                    android:text="@string/method_title"/>
+
+                <TextView
+                    android:id="@+id/method_value_tv"
+                    android:layout_width="0dp"
+                    android:gravity="center_horizontal"
+                    android:layout_height="wrap_content"
+                    android:textSize="@dimen/summary_text_size"
+                    app:layout_constraintTop_toTopOf="@id/method_tv"
+                    app:layout_constraintHorizontal_weight="1"
+                    app:layout_constraintLeft_toRightOf="@id/method_tv"
+                    app:layout_constraintRight_toRightOf="parent"
+                    android:text="@{model.method.name}"
+                    tools:text="Visa"/>
+
+                <TextView
+                    android:id="@+id/bank_tv"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_marginBottom="@dimen/summary_title_margin_bottom"
+                    android:gravity="center_horizontal"
+                    app:layout_constraintTop_toBottomOf="@id/method_tv"
+                    app:layout_constraintHorizontal_weight="1"
+                    app:layout_constraintLeft_toLeftOf="parent"
+                    app:layout_constraintHorizontal_chainStyle="spread"
+                    app:layout_constraintRight_toLeftOf="@id/bank_value_tv"
+                    android:text="@string/issuer_title"/>
+
+                <TextView
+                    android:id="@+id/bank_value_tv"
+                    android:layout_width="0dp"
+                    android:gravity="center_horizontal"
+                    android:layout_height="wrap_content"
+                    android:textSize="@dimen/summary_text_size"
+                    app:layout_constraintTop_toTopOf="@id/bank_tv"
+                    app:layout_constraintHorizontal_weight="1"
+                    app:layout_constraintLeft_toRightOf="@id/bank_tv"
+                    app:layout_constraintRight_toRightOf="parent"
+                    android:text="@{model.bank.name}"
+                    tools:text="Cencosud"/>
+
+                <TextView
+                    android:id="@+id/quota_tv"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_marginBottom="@dimen/summary_title_margin_bottom"
+                    android:gravity="center_horizontal"
+                    app:layout_constraintTop_toBottomOf="@id/bank_tv"
+                    app:layout_constraintHorizontal_weight="1"
+                    app:layout_constraintLeft_toLeftOf="parent"
+                    app:layout_constraintHorizontal_chainStyle="spread"
+                    app:layout_constraintRight_toLeftOf="@id/quota_value_tv"
+                    android:text="@string/quotas_title"/>
+
+                <TextView
+                    android:id="@+id/quota_value_tv"
+                    android:layout_width="0dp"
+                    android:gravity="center_horizontal"
+                    android:layout_height="wrap_content"
+                    android:textSize="@dimen/summary_text_size"
+                    app:layout_constraintTop_toTopOf="@id/quota_tv"
+                    app:layout_constraintHorizontal_weight="1"
+                    app:layout_constraintLeft_toRightOf="@id/quota_tv"
+                    app:layout_constraintRight_toRightOf="parent"
+                    android:text="@{model.quota.installments + ``}"
+                    tools:text="3"/>
+
+                <View
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    app:layout_constraintHorizontal_chainStyle="spread"
+                    android:gravity="center_horizontal"
+                    app:layout_constraintTop_toBottomOf="@id/quota_tv"
+                    app:layout_constraintHorizontal_weight="1"
+                    app:layout_constraintLeft_toLeftOf="parent"
+                    app:layout_constraintRight_toLeftOf="@id/quota_message_value_tv"/>
+
+                <TextView
+                    android:id="@+id/quota_message_value_tv"
+                    android:layout_width="0dp"
+                    android:gravity="center_horizontal"
+                    android:layout_height="wrap_content"
+                    android:textSize="@dimen/summary_recommended_message_text_size"
+                    app:layout_constraintTop_toBottomOf="@id/quota_value_tv"
+                    app:layout_constraintHorizontal_weight="1"
+                    app:layout_constraintLeft_toRightOf="@id/quota_tv"
+                    app:layout_constraintRight_toRightOf="parent"
+                    android:text="@{model.quota.recommendedMessage}"
+                    tools:text="3 cuotas de ..."/>
+
+            </android.support.constraint.ConstraintLayout>
 
         </android.support.v4.widget.NestedScrollView>
 

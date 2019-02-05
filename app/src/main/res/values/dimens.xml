@@ -5,4 +5,8 @@
     <dimen name="payment_method_thumbnail_size">32dp</dimen>
     <dimen name="activity_vertical_margin">16dp</dimen>
     <dimen name="activity_horizontal_margin">16dp</dimen>
+
+    <dimen name="summary_text_size">20sp</dimen>
+    <dimen name="summary_recommended_message_text_size">17sp</dimen>
+    <dimen name="summary_title_margin_bottom">12dp</dimen>
 </resources>
