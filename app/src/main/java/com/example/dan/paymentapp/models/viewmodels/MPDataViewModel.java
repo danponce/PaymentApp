@@ -15,7 +15,9 @@ public class MPDataViewModel extends ViewModel
     public final ObservableInt paymentAmmount = new ObservableInt();
     public final ObservableInt paymentBank = new ObservableInt();
     public final ObservableInt paymentIssuerQuotas = new ObservableInt();
-    public final ObservableBoolean finishedPaymentProcess = new ObservableBoolean();
+
+    // To know if the process is finished by the user
+    public final ObservableBoolean isFinished = new ObservableBoolean();
     private PaymentBank bank;
     private PaymentMethod method;
     private PaymentIssuerQuota quota;

@@ -13,7 +13,7 @@ import com.example.dan.paymentapp.fragments.IssuerQuotasFragment;
 import com.example.dan.paymentapp.fragments.MethodFragment;
 import com.example.dan.paymentapp.models.viewmodels.MPDataViewModel;
 
-public class MainActivity extends AppCompatActivity implements FragmentClicksListener
+public class MainActivity extends AppCompatActivity implements FragmentClicksListener, InitSummaryFragment.OnStartProcessListener
 {
     public static final int FRAGMENT_AMOUNT = 0;
     public static final int FRAGMENT_METHOD = 1;
@@ -77,7 +77,12 @@ public class MainActivity extends AppCompatActivity implements FragmentClicksLis
             
             case FRAGMENT_BANK : return IssuerQuotasFragment.newInstance();
 
-            case FRAGMENT_ISSUER_QUOTAS : return InitSummaryFragment.newInstance();
+            case FRAGMENT_ISSUER_QUOTAS :
+
+                // Also we finish the process
+                mMPDataViewModel.isFinished.set(true);
+
+                return InitSummaryFragment.newInstance();
 
             default: return null;
         }
@@ -100,5 +105,11 @@ public class MainActivity extends AppCompatActivity implements FragmentClicksLis
     private Fragment getInitialFragment()
     {
         return InitSummaryFragment.newInstance();
+    }
+
+    @Override
+    public void onStartClick()
+    {
+        replaceFragment(AmountFragment.newInstance());
     }
 }
