@@ -3,7 +3,9 @@ package com.example.dan.paymentapp.fragments;
 import android.arch.lifecycle.ViewModelProviders;
 import android.content.Context;
 import android.databinding.DataBindingUtil;
+import android.os.Build;
 import android.os.Bundle;
+import android.support.transition.TransitionInflater;
 import android.support.v4.app.Fragment;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -43,6 +45,10 @@ public class AmountFragment extends BaseFragment
         super.onCreate(savedInstanceState);
 
         mMPDataViewModel = ViewModelProviders.of(getActivity()).get(MPDataViewModel.class);
+
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP)
+            setSharedElementEnterTransition(TransitionInflater.from(getContext()).inflateTransition(android.R.transition.move));
+
     }
 
     @Override
