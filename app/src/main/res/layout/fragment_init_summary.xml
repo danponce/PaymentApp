@@ -36,6 +36,7 @@
             app:layout_constraintLeft_toLeftOf="parent"
             app:layout_constraintRight_toRightOf="parent"
             app:layout_constraintTop_toTopOf="parent"
+            app:layout_constrainedHeight="true"
             android:visibility="@{model.isFinished ? View.VISIBLE : View.GONE}">
 
             <LinearLayout
@@ -75,7 +76,7 @@
                 <TextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="@string/next_btn" />
+                    android:text="@{model.isFinished ? @string/restart_payment : @string/start_payment}" />
 
             </LinearLayout>
 
