@@ -51,4 +51,17 @@ public class MPDataViewModel extends ViewModel
     {
         this.quota = quota;
     }
+
+    // Reset the values to start a new payment
+    public void reset()
+    {
+        paymentAmmount.set(0);
+        paymentMethod.set("");
+        paymentBank.set(0);
+        paymentIssuerQuotas.set(0);
+        bank = null;
+        method = null;
+        quota = null;
+
+    }
 }

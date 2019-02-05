@@ -125,6 +125,8 @@ public class MainActivity extends AppCompatActivity implements FragmentClicksLis
                     return false;
                 }
 
+                break;
+
             case FRAGMENT_METHOD :
                 if(mMPDataViewModel.getMethod() == null)
                 {
@@ -133,6 +135,8 @@ public class MainActivity extends AppCompatActivity implements FragmentClicksLis
                     return false;
                 }
 
+                break;
+
             case FRAGMENT_BANK :
                 if(mMPDataViewModel.getBank() == null)
                 {
@@ -140,6 +144,8 @@ public class MainActivity extends AppCompatActivity implements FragmentClicksLis
 
                     return false;
                 }
+
+                break;
         }
 
         return true;
@@ -167,6 +173,10 @@ public class MainActivity extends AppCompatActivity implements FragmentClicksLis
     @Override
     public void onStartClick()
     {
+        if(mMPDataViewModel.isFinished.get())
+            // Set a new instance of the MPDataViewModel
+            mMPDataViewModel.reset();
+
         replaceFragment(AmountFragment.newInstance(), null);
     }
 }
