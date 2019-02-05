@@ -25,7 +25,7 @@
             android:id="@+id/numbers_container"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:padding="8dp"
+            android:padding="@dimen/numbers_container_padding"
             android:orientation="horizontal"
             app:layout_constraintTop_toTopOf="parent">
 

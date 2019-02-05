@@ -12,12 +12,12 @@
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:orientation="horizontal"
-        android:padding="6dp">
+        android:padding="@dimen/items_quota_linear_layout_padding">
 
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:textSize="19sp"
+            android:textSize="@dimen/items_quota_text_size"
             android:text="@{quota.installments + ` ` + (quota.installments == 1 ? @string/payment_quota : @string/payment_quotas)}"/>
 
     </LinearLayout>

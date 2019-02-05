@@ -26,7 +26,7 @@
             android:id="@+id/numbers_container"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:padding="8dp"
+            android:padding="@dimen/numbers_container_padding"
             android:orientation="horizontal"
             app:layout_constraintTop_toTopOf="parent">
 
@@ -70,7 +70,6 @@
             android:layout_marginRight="@dimen/activity_horizontal_margin"
             android:text="@string/payment_bank_title"
             app:layout_constraintTop_toBottomOf="@id/numbers_container"
-            android:layout_marginBottom="18dp"
             android:visibility="@{bindModel.isLoading | bindModel.isListEmpty ? View.GONE : View.VISIBLE}"/>
 
         <android.support.v7.widget.RecyclerView
@@ -81,7 +80,7 @@
             android:background="@color/md_grey_100"
             android:layout_marginLeft="@dimen/activity_horizontal_margin"
             android:layout_marginRight="@dimen/activity_horizontal_margin"
-            android:layout_marginTop="12dp"
+            android:layout_marginTop="@dimen/fragments_recycler_margin_top"
             app:layout_constrainedHeight="true"
             app:layout_constraintTop_toBottomOf="@id/title_tv"
             app:layout_constraintLeft_toLeftOf="parent"
@@ -103,7 +102,7 @@
             android:layout_height="wrap_content"
             android:orientation="vertical"
             android:gravity="center_horizontal"
-            android:padding="54dp"
+            android:padding="@dimen/empty_banks_container_padding"
             app:layout_constraintTop_toTopOf="parent"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintLeft_toLeftOf="parent"
@@ -114,12 +113,12 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:src="@drawable/ic_empty_box_128dp"
-                android:layout_marginBottom="12dp"/>
+                android:layout_marginBottom="@dimen/empty_banks_image_margin_bottom"/>
 
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:textSize="19sp"
+                android:textSize="@dimen/empty_banks_text_size"
                 android:text="@string/empty_bank_list_message"/>
 
         </LinearLayout>

@@ -17,7 +17,7 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:orientation="horizontal"
-        android:padding="6dp">
+        android:padding="@dimen/buttons_container_padding">
 
         <!-- If fragment id is equal to amount fragment then don't show previous button -->
         <android.support.v7.widget.CardView

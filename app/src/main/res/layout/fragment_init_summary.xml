@@ -22,7 +22,7 @@
             android:id="@+id/logo_iv"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:padding="80dp"
+            android:padding="@dimen/logo_padding"
             android:src="@drawable/logo_mp"
             app:layout_constraintBottom_toTopOf="@id/next_container"
             app:layout_constraintLeft_toLeftOf="parent"
@@ -209,7 +209,7 @@
                 android:layout_height="wrap_content"
                 android:gravity="center_horizontal"
                 android:orientation="vertical"
-                android:padding="6dp">
+                android:padding="@dimen/buttons_container_padding">
 
                 <ImageView
                     android:layout_width="wrap_content"
