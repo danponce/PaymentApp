@@ -12,6 +12,7 @@ import com.example.dan.paymentapp.fragments.InitSummaryFragment;
 import com.example.dan.paymentapp.fragments.IssuerQuotasFragment;
 import com.example.dan.paymentapp.fragments.MethodFragment;
 import com.example.dan.paymentapp.models.viewmodels.MPDataViewModel;
+import com.example.dan.paymentapp.utils.GeneralUtils;
 
 public class MainActivity extends AppCompatActivity implements FragmentClicksListener, InitSummaryFragment.OnStartProcessListener
 {
@@ -71,7 +72,11 @@ public class MainActivity extends AppCompatActivity implements FragmentClicksLis
     {
         switch (fragmentId)
         {
-            case FRAGMENT_AMOUNT : return MethodFragment.newInstance();
+            case FRAGMENT_AMOUNT :
+                // hide the keyboard if it's opened
+                GeneralUtils.hideKeyboard(this);
+
+                return MethodFragment.newInstance();
 
             case FRAGMENT_METHOD : return BankFragment.newInstance();
             
