@@ -79,7 +79,9 @@
                 android:inputType="number"
                 android:hint="@string/hint_amount"
                 android:text="@={amount}"
-                android:textSize="@dimen/amount_text_size" />
+                android:textSize="@dimen/amount_text_size"
+                android:drawableLeft="@drawable/ic_attach_money_black_24dp"
+                android:drawablePadding="@dimen/drawable_padding"/>
 
         </android.support.design.widget.TextInputLayout>
 

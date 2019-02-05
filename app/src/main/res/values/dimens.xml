@@ -37,4 +37,6 @@
 
     <dimen name="quotas_recommended_message_text_size">20sp</dimen>
 
+    <dimen name="drawable_padding">6dp</dimen>
+
 </resources>
