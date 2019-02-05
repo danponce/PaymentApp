@@ -39,7 +39,7 @@ public abstract class BaseFragment extends Fragment
         @Override
         public void onClick(View v)
         {
-            mListener.previousFragment(getFragmentId());
+            mListener.previousFragment(getFragmentId(), getSharedTransitionView());
         }
     }
 

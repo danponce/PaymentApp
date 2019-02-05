@@ -33,7 +33,7 @@
                 android:id="@+id/step_iv"
                 android:layout_width="0dp"
                 android:layout_weight="1"
-                android:transitionName="profile"
+                android:transitionName="@string/shared_transition_name"
                 android:layout_height="wrap_content"
                 android:src="@drawable/ic_one_32dp" />
 

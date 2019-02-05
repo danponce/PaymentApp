@@ -48,9 +48,9 @@ public class MainActivity extends AppCompatActivity implements FragmentClicksLis
     }
 
     @Override
-    public void previousFragment(int fragmentId)
+    public void previousFragment(int fragmentId, View sharedTransitionView)
     {
-        replaceFragment(getPreviousFragment(fragmentId), null);
+        replaceFragment(getPreviousFragment(fragmentId), sharedTransitionView);
     }
 
     @Override
@@ -69,7 +69,7 @@ public class MainActivity extends AppCompatActivity implements FragmentClicksLis
 
             // Check if there's a shared transition to do
             if(sharedTransitionView != null)
-                fragmentTransaction.addSharedElement(sharedTransitionView, ViewCompat.getTransitionName(sharedTransitionView));
+                fragmentTransaction.addSharedElement(sharedTransitionView, getString(R.string.shared_transition_name));
 
             fragmentTransaction.commitAllowingStateLoss();
         }

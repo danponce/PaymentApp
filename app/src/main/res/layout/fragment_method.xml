@@ -42,7 +42,7 @@
                 android:layout_width="0dp"
                 android:layout_weight="1"
                 android:layout_height="wrap_content"
-                android:transitionName="profile"
+                android:transitionName="@string/shared_transition_name"
                 android:src="@drawable/ic_two_32dp" />
 
             <ImageView
