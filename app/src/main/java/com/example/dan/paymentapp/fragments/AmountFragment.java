@@ -68,4 +68,10 @@ public class AmountFragment extends BaseFragment
     {
         return MainActivity.FRAGMENT_AMOUNT;
     }
+
+    @Override
+    public View getSharedTransitionView()
+    {
+        return mBinding.stepIv;
+    }
 }

@@ -145,4 +145,10 @@ public class IssuerQuotasFragment extends BaseFragment
     {
         return MainActivity.FRAGMENT_ISSUER_QUOTAS;
     }
+
+    @Override
+    public View getSharedTransitionView()
+    {
+        return null;
+    }
 }

@@ -168,4 +168,10 @@ public class BankFragment extends BaseFragment implements BankRecyclerClickListe
     {
         return MainActivity.FRAGMENT_BANK;
     }
+
+    @Override
+    public View getSharedTransitionView()
+    {
+        return mBinding.stepIv;
+    }
 }

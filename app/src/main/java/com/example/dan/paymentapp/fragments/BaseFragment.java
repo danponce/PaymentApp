@@ -30,7 +30,7 @@ public abstract class BaseFragment extends Fragment
         @Override
         public void onClick(View v)
         {
-            mListener.nextFragment(getFragmentId());
+            mListener.nextFragment(getFragmentId(), getSharedTransitionView());
         }
     }
 
@@ -44,6 +44,7 @@ public abstract class BaseFragment extends Fragment
     }
 
     public abstract int getFragmentId();
+    public abstract View getSharedTransitionView();
 
     @Override
     public void onAttach(Context context)

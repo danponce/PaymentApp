@@ -3,8 +3,10 @@ package com.example.dan.paymentapp;
 import android.arch.lifecycle.ViewModelProviders;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentTransaction;
+import android.support.v4.view.ViewCompat;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.view.View;
 
 import com.example.dan.paymentapp.fragments.AmountFragment;
 import com.example.dan.paymentapp.fragments.BankFragment;
@@ -48,22 +50,27 @@ public class MainActivity extends AppCompatActivity implements FragmentClicksLis
     @Override
     public void previousFragment(int fragmentId)
     {
-        replaceFragment(getPreviousFragment(fragmentId));
+        replaceFragment(getPreviousFragment(fragmentId), null);
     }
 
     @Override
-    public void nextFragment(int fragmentId)
+    public void nextFragment(int fragmentId, View sharedTransitionView)
     {
-        replaceFragment(getNextFragment(fragmentId));
+        replaceFragment(getNextFragment(fragmentId), sharedTransitionView);
     }
 
-    private void replaceFragment(Fragment fragment)
+    private void replaceFragment(Fragment fragment, View sharedTransitionView)
     {
         FragmentTransaction fragmentTransaction = getSupportFragmentManager().beginTransaction();
 
         if(fragment != null)
         {
             fragmentTransaction.replace(R.id.container, fragment);
+
+            // Check if there's a shared transition to do
+            if(sharedTransitionView != null)
+                fragmentTransaction.addSharedElement(sharedTransitionView, ViewCompat.getTransitionName(sharedTransitionView));
+
             fragmentTransaction.commitAllowingStateLoss();
         }
     }
@@ -115,6 +122,6 @@ public class MainActivity extends AppCompatActivity implements FragmentClicksLis
     @Override
     public void onStartClick()
     {
-        replaceFragment(AmountFragment.newInstance());
+        replaceFragment(AmountFragment.newInstance(), null);
     }
 }
