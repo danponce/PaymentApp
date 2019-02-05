@@ -7,6 +7,7 @@ import android.support.v4.view.ViewCompat;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.View;
+import android.widget.Toast;
 
 import com.example.dan.paymentapp.fragments.AmountFragment;
 import com.example.dan.paymentapp.fragments.BankFragment;
@@ -15,6 +16,7 @@ import com.example.dan.paymentapp.fragments.IssuerQuotasFragment;
 import com.example.dan.paymentapp.fragments.MethodFragment;
 import com.example.dan.paymentapp.models.viewmodels.MPDataViewModel;
 import com.example.dan.paymentapp.utils.GeneralUtils;
+import com.example.dan.paymentapp.utils.ToastUtils;
 
 public class MainActivity extends AppCompatActivity implements FragmentClicksListener, InitSummaryFragment.OnStartProcessListener
 {
@@ -56,6 +58,9 @@ public class MainActivity extends AppCompatActivity implements FragmentClicksLis
     @Override
     public void nextFragment(int fragmentId, View sharedTransitionView)
     {
+        if(!shouldGoToNextFragment(fragmentId))
+            return;
+
         replaceFragment(getNextFragment(fragmentId), sharedTransitionView);
     }
 
@@ -80,6 +85,7 @@ public class MainActivity extends AppCompatActivity implements FragmentClicksLis
         switch (fragmentId)
         {
             case FRAGMENT_AMOUNT :
+
                 // hide the keyboard if it's opened
                 GeneralUtils.hideKeyboard(this);
 
@@ -98,6 +104,45 @@ public class MainActivity extends AppCompatActivity implements FragmentClicksLis
 
             default: return null;
         }
+    }
+
+    /**
+     * Validates if the user selected
+     * or add the necessary info based
+     * on the corresponding fragment
+     * @param fragmentId    the corresponding fragment id
+     * @return              false if it shouldn't go to next fragment, true otherwise
+     */
+    private boolean shouldGoToNextFragment(int fragmentId)
+    {
+        switch (fragmentId)
+        {
+            case FRAGMENT_AMOUNT :
+                if(mMPDataViewModel.paymentAmmount.get() <= 0)
+                {
+                    ToastUtils.showShortToast(this, R.string.invalid_amount);
+
+                    return false;
+                }
+
+            case FRAGMENT_METHOD :
+                if(mMPDataViewModel.getMethod() == null)
+                {
+                    ToastUtils.showShortToast(this, R.string.invalid_method);
+
+                    return false;
+                }
+
+            case FRAGMENT_BANK :
+                if(mMPDataViewModel.getBank() == null)
+                {
+                    ToastUtils.showShortToast(this, R.string.invalid_bank);
+
+                    return false;
+                }
+        }
+
+        return true;
     }
 
     private Fragment getPreviousFragment(int fragmentId)

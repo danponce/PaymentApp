@@ -30,6 +30,11 @@
     <!-- Shared Transition Name-->
     <string name="shared_transition_name">step_transition</string>
 
+    <!-- Validation messages -->
+    <string name="invalid_amount">Ingresa un monto mayor a cero</string>
+    <string name="invalid_method">Selecciona un método de pago antes de continuar</string>
+    <string name="invalid_bank">Selecciona un banco antes de continuar</string>
+
     <!-- TODO: Remove or change this placeholder text -->
     <string name="hello_blank_fragment">Hello blank fragment</string>
 </resources>
